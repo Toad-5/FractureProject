@@ -6274,7 +6274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -14254,6 +14254,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6391215666148015017, guid: c3b5519ab32e7e54285932889e450678, type: 3}
   m_PrefabInstance: {fileID: 1799556959}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &1535571376 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 2033218753040073043, guid: 2ba6749c88181eb469ec66fb32349688, type: 3}
+  m_PrefabInstance: {fileID: 1574637700}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1536739134
 GameObject:
   m_ObjectHideFlags: 0
@@ -14355,6 +14360,8 @@ MonoBehaviour:
   crowdSpeed: 50
   ejectionDistance: 5
   ejectionSpeed: 0
+  rb: {fileID: 0}
+  locked: 0
 --- !u!4 &1536739139
 Transform:
   m_ObjectHideFlags: 0
@@ -14703,6 +14710,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4320371009729194558, guid: 2ba6749c88181eb469ec66fb32349688, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8593480687241786602, guid: 2ba6749c88181eb469ec66fb32349688, type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 1535571376}
+    - target: {fileID: 8593480687241786602, guid: 2ba6749c88181eb469ec66fb32349688, type: 3}
+      propertyPath: locked
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

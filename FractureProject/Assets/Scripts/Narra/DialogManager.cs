@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class DialogManager : MonoBehaviour
@@ -9,7 +11,6 @@ public class DialogManager : MonoBehaviour
     public static DialogManager instance;
     public TMPro.TMP_Text nameText;
     public TMPro.TMP_Text phrasesText;
-
     void Start()
     {
         if (instance != null)
@@ -32,32 +33,34 @@ public class DialogManager : MonoBehaviour
         foreach (string sentence in dialogs.sentences)
         {
             sentences.Enqueue(sentence);
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Debug.Log("tkt ça marche");
-                sentences.Dequeue();
-                Debug.Log(sentence);
-            }
         }
-
-        DisplayNextSentence();
+        
+        StartCoroutine(DisplayNextSentence(dialogs));
     }
 
-    public void DisplayNextSentence()
+    IEnumerator DisplayNextSentence(Dialogs dialogs)
     {
+        Debug.Log("gonna chat soon");
+        
+        while(!(Input.GetKeyDown(KeyCode.Space)||Input.GetButtonDown("Fire1")))
+        {
+            yield return null;
+        }
+        
+        Debug.Log(dialogs.sentences[0]);
+        sentences.Dequeue();
+        Debug.Log(sentences.Count);
+
         if (sentences.Count == 0)
         {
             EndDialogue();
-            return;
+            yield return null;
         }
-
-        string sentence = sentences.Dequeue();
-        phrasesText.text = sentence;
-        Debug.Log(sentence);
     }
 
     public void EndDialogue()
     {
+        StopCoroutine("DisplayNextSentence");
         Debug.Log("Finished chatting.");
     }
 }
