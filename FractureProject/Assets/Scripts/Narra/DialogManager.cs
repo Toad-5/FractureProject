@@ -3,14 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class DialogManager : MonoBehaviour
 {
-    private Queue<string> sentences;
+    private Queue<string> sentencesQueue;
     public TriggerEvent TriggerEvent;
     public static DialogManager instance;
     public TMPro.TMP_Text nameText;
     public TMPro.TMP_Text phrasesText;
+   
     void Start()
     {
         if (instance != null)
@@ -20,19 +22,20 @@ public class DialogManager : MonoBehaviour
         }
         instance = this;
         
-        sentences = new Queue<string>();
-        Debug.Log(sentences.Count);
+        sentencesQueue = new Queue<string>();
+        Debug.Log(sentencesQueue.Count);
     }
 
     public void StartDialogue(Dialogs dialogs)
     {
         Debug.Log("Starting to chat with " + dialogs.name);
         nameText.text = dialogs.name;
-        sentences.Clear();
+        phrasesText.text = dialogs.sentences[0];
+        sentencesQueue.Clear();
 
-        foreach (string sentence in dialogs.sentences)
+        foreach (string sentence in dialogs.sentences.ToList())
         {
-            sentences.Enqueue(sentence);
+            sentencesQueue.Enqueue(sentence);
         }
         
         StartCoroutine(DisplayNextSentence(dialogs));
@@ -46,12 +49,15 @@ public class DialogManager : MonoBehaviour
         {
             yield return null;
         }
-        
-        Debug.Log(dialogs.sentences[0]);
-        sentences.Dequeue();
-        Debug.Log(sentences.Count);
 
-        if (sentences.Count == 0)
+        if (sentencesQueue.Count != 0)
+        {
+            Debug.Log(dialogs.sentences[0]);
+            sentencesQueue.Dequeue();
+            Debug.Log(sentencesQueue.Count);
+        }
+        
+        if (sentencesQueue.Count == 0)
         {
             EndDialogue();
             yield return null;
@@ -60,7 +66,7 @@ public class DialogManager : MonoBehaviour
 
     public void EndDialogue()
     {
-        StopCoroutine("DisplayNextSentence");
         Debug.Log("Finished chatting.");
+        StopCoroutine("DisplayNextSentence");
     }
 }
