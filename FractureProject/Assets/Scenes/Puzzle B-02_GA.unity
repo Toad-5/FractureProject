@@ -3960,7 +3960,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 1
-  m_Color: {r: 0.9811321, g: 0.8110049, b: 0.5784977, a: 1}
+  m_Color: {r: 0.9622642, g: 0.7568826, b: 0.47508007, a: 1}
   m_Intensity: 3.1
   m_Range: 10
   m_SpotAngle: 30
@@ -5405,6 +5405,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   targetTag: ProtoBarrier
+  isTalking: 0
+  dialogs: {fileID: 0}
 --- !u!65 &511692145
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10236,6 +10238,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   targetTag: ProtoBarrier
+  isTalking: 0
+  dialogs: {fileID: 0}
 --- !u!65 &1140311880
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10308,6 +10312,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   targetTag: Player
+  isTalking: 0
+  dialogs: {fileID: 0}
 --- !u!65 &1154701249
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11451,6 +11457,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   targetTag: Player
+  isTalking: 0
+  dialogs: {fileID: 0}
 --- !u!65 &1263313386
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14136,6 +14144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d5726240952155479f41243d9c49072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  animatorController: {fileID: 0}
   spriteRenderer: {fileID: 0}
   currentState: 0
   moveSpeed: 5
@@ -14407,6 +14416,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   targetTag: ProtoBarrier
+  isTalking: 0
+  dialogs: {fileID: 0}
 --- !u!65 &1561861344
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14560,6 +14571,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   targetTag: ProtoBarrier
+  isTalking: 0
+  dialogs: {fileID: 0}
 --- !u!65 &1606056509
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14704,6 +14717,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   targetTag: Player
+  isTalking: 0
+  dialogs: {fileID: 0}
 --- !u!65 &1642520961
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16595,6 +16610,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   targetTag: ProtoBarrier
+  isTalking: 0
+  dialogs: {fileID: 0}
 --- !u!65 &1894652829
 BoxCollider:
   m_ObjectHideFlags: 0
