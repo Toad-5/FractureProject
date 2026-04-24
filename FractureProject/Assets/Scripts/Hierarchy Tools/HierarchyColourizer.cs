@@ -20,22 +20,22 @@ namespace Hierarchy_Tools
         {
             new HierarchyStyle
                 {
-                    prefix = "###", backgroundColor = new Color(0.07f,0.40f,0.20f),
-                    textColor = new Color(0.67f,1f,0.80f),   bold=true,  italic=false, fontSize=11
+                    prefix = "###", backgroundColor = new Color(0.0f,0.4f,0.2f),
+                    textColor = new Color(0.67f,1f,0.80f),   bold=true,  italic=false, fontSize=13
                 },
             new HierarchyStyle
                 {
-                    prefix = "##",  backgroundColor = new Color(0.67f,0.53f,0f),
-                    textColor = new Color(1f,0.91f,0.63f),   bold=false, italic=true,  fontSize=11
+                    prefix = "##",  backgroundColor = new Color(0.67f,0.0f,0.0f),
+                    textColor = new Color(1f,0.8f,0.8f),   bold=true, italic=false,  fontSize=12
                 },
             new HierarchyStyle
                 {
-                    prefix = "#",   backgroundColor = new Color(0.13f,0.33f,0.67f),
-                    textColor = new Color(0.87f,0.93f,1f),   bold=true,  italic=false, fontSize=12
+                    prefix = "#",   backgroundColor = new Color(0.8f,0.25f,0.0f),
+                    textColor = new Color(1f,0.9f,0.8f),   bold=true,  italic=false, fontSize=11
                 },
             new HierarchyStyle
                 {
-                    prefix = "---", backgroundColor = new Color(0.25f,0.25f,0.25f),
+                    prefix = "*", backgroundColor = new Color(0.25f,0.25f,0.25f),
                     textColor = new Color(0.75f,0.75f,0.75f),bold=false, italic=true,  fontSize=10
                         
                 }
