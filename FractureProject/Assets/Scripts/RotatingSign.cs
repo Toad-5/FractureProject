@@ -39,7 +39,7 @@ public class RotatingSign : MonoBehaviour
     {
         if (isPlayerNear)
         {
-            if (Input.GetKeyDown(KeyCode.Q) || Input.GetButton("Fire1"))
+            if (Input.GetKeyDown(KeyCode.Q) || Input.GetButtonDown("Fire1"))
             {
                 onInteraction.Invoke();
             }
