@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MS_Vignette
+  m_Name: MS_Door_Blue
   m_Shader: {fileID: -6465566751694194690, guid: ba5f3c6ad8735ae4cb0dbbdcaf101e4e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -25,7 +25,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseColor:
-        m_Texture: {fileID: 2800000, guid: e93aa6bd10e443b478057cd742b61e44, type: 3}
+        m_Texture: {fileID: 2800000, guid: c4a2389663e4d9f408ad17cffe28795f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -61,7 +61,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Metallic:
-        m_Texture: {fileID: 2800000, guid: f42d5eb72d45b5c4db97ad2d33207911, type: 3}
+        m_Texture: {fileID: 2800000, guid: 42573c8617b1fbb4c9780dbb797590c4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -69,7 +69,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal:
-        m_Texture: {fileID: 2800000, guid: 0abf720e399d0714dbd3809bbb9a8525, type: 3}
+        m_Texture: {fileID: 2800000, guid: cf6a383a8f2e3a84c9c2369b92eec8ea, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -141,7 +141,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Position: {r: 0.45168772, g: 0.45610705, b: 78.17525, a: 0}
+    - _Position: {r: 0.84059703, g: 0.8189235, b: 101.48055, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
