@@ -54,9 +54,13 @@ public class SucessionOfEvents : MonoBehaviour
 public class TimedEvent
 {
     public EventType type;
+    [Header ("Parameters")]
     public UnityEvent unityEvent;
+    public Transform cameraTargetPoint;
+    
+    [Header ("Time")]
     public float timeBeforeNextEvent;
-
+    
     private delegate void EventDelegate();
     private EventDelegate eventDelegate;
     
@@ -99,7 +103,7 @@ public class TimedEvent
 
     public void CameraMovement()
     {
-        
+        IsometricCameraFollow.instance.ChangeTarget(cameraTargetPoint);
     }
 
     public void ObjectMovement()

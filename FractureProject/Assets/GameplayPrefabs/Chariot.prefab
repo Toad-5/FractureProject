@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6611d95a061f7b842bfe052bc4771193, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewPushableObject
-  unitsPerPush: 2.5
+  unitsPerPush: 1.25
   pushSpeed: 10
   pushDelay: 0.25
   obstacleLayer:
@@ -178,7 +178,6 @@ MonoBehaviour:
   spriteWhenPush: {fileID: 21300000, guid: 11664e7442cb87743a3a0024eb4146bf, type: 3}
   lowFrequency: 0.6
   highFrequency: 0.35
-  rumbleDuration: 0.1
 --- !u!1 &7127406416743827479
 GameObject:
   m_ObjectHideFlags: 0

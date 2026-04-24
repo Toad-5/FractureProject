@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: MS_Grass
-  m_Shader: {fileID: -6465566751694194690, guid: 7dcfe8cdbe004f8429d934989647049e, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 3942e38088bfc824faf96256331c1a5d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -85,6 +85,7 @@ Material:
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
     - _AlphaToMask: 0
+    - _Amplitude: 0.8
     - _BladeRangeLimit: 0.7
     - _BladeXseed: -1.49
     - _Blend: 0
@@ -103,7 +104,9 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _GrassHeight: 0.7
+    - _GrassTiling02: 0
     - _GrassWidth: 0.9
+    - _Grassheight_02: 0.37
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -119,6 +122,7 @@ Material:
     - _WorkflowMode: 1
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
+    - _bendStrenght: 0.2
     - _bladeRandomOffset: 0.05
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
@@ -127,6 +131,7 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GrassOffset: {r: -5, g: 0.27, b: 0, a: 0}
     - _GrassTiling: {r: 9.16, g: 0.82, b: 0, a: 0}
+    - _GrassTiling_O2: {r: 0, g: 0, b: 0, a: 0}
     - _LightShade: {r: 0.51849985, g: 0.6981132, b: 0.23489968, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
