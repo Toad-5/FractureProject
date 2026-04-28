@@ -246,6 +246,11 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!4 &93319711 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8075679294690001367, guid: 262104f32f762564bbdf7e9af79019ea, type: 3}
+  m_PrefabInstance: {fileID: 2731683031522317714}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &131488948
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,6 +300,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &206058506 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8593480687241786602, guid: 2ba6749c88181eb469ec66fb32349688, type: 3}
+  m_PrefabInstance: {fileID: 756121322}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d5726240952155479f41243d9c49072, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!114 &345637811 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6711593088410666575, guid: 1d7791479aa342445a322e1d0f25b047, type: 3}
@@ -522,6 +538,37 @@ MonoBehaviour:
   Mask:
     serializedVersion: 2
     m_Bits: 128
+--- !u!1 &834681070
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 834681071}
+  m_Layer: 0
+  m_Name: target (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &834681071
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 834681070}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.27935332, y: 0.3647703, z: -0.11571193, w: 0.8806334}
+  m_LocalPosition: {x: 81.647285, y: 14.548649, z: -63.77613}
+  m_LocalScale: {x: 1.9605, y: 1.9605001, z: 1.9605}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 93319711}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &845137746
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,6 +696,11 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!4 &982132002 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3502476188666794868, guid: 262104f32f762564bbdf7e9af79019ea, type: 3}
+  m_PrefabInstance: {fileID: 2731683031522317714}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1142552631
 GameObject:
   m_ObjectHideFlags: 0
@@ -660,6 +712,7 @@ GameObject:
   - component: {fileID: 1142552634}
   - component: {fileID: 1142552633}
   - component: {fileID: 1142552632}
+  - component: {fileID: 1142552635}
   m_Layer: 0
   m_Name: Cube (7)
   m_TagString: Untagged
@@ -772,6 +825,71 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1142552635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142552631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 905ddf666e66c4c448bf9232467938bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SucessionOfEvents
+  tagToTrigger: Player
+  isTriggeredOnEnter: 1
+  isTriggeredOnExit: 0
+  isTriggeredOnAwake: 0
+  events:
+  - type: 0
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 206058506}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: LockPlayer
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+    cameraTargetPoint: {fileID: 0}
+    timeBeforeNextEvent: 1
+  - type: 1
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    cameraTargetPoint: {fileID: 834681071}
+    timeBeforeNextEvent: 2
+  - type: 1
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    cameraTargetPoint: {fileID: 982132002}
+    timeBeforeNextEvent: 1
+  - type: 0
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 206058506}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: LockPlayer
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    cameraTargetPoint: {fileID: 982132002}
+    timeBeforeNextEvent: 1
 --- !u!114 &1166641348 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8902539464052521125, guid: 1d7791479aa342445a322e1d0f25b047, type: 3}
@@ -933,6 +1051,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '###04###'
       objectReference: {fileID: 0}
+    - target: {fileID: 4929972277234608533, guid: 262104f32f762564bbdf7e9af79019ea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6745147096109607087, guid: 262104f32f762564bbdf7e9af79019ea, type: 3}
       propertyPath: m_LocalPosition.x
       value: -151.96729
@@ -975,7 +1097,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8075679294690001367, guid: 262104f32f762564bbdf7e9af79019ea, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 834681071}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1480704780926495471, guid: 262104f32f762564bbdf7e9af79019ea, type: 3}
       insertIndex: -1
