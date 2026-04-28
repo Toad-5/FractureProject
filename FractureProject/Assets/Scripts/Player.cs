@@ -17,10 +17,14 @@ public class Player : MonoBehaviour
         Walking,
         Transported,
         Ejected,
-        Pushing //Nico
+        Pushing, //Nico
+        Attacking
     }
     
     public States currentState = States.Idle;
+
+    [HideInInspector] 
+    public Vector3 lastFacingDirection = new Vector3(1, 0, 1).normalized;
 
     private void Awake()
     {
@@ -55,7 +59,7 @@ public class Player : MonoBehaviour
     public Rigidbody rb;
 
     public bool locked;
-
+    
     void Update()
     {
         float h = Input.GetAxisRaw("Horizontal");
@@ -63,7 +67,23 @@ public class Player : MonoBehaviour
         
         direction = new Vector3(h, 0, v).normalized;
         
-        if (currentState != States.Transported && currentState != States.Ejected /*nico*/ && currentState != States.Pushing)
+        if (direction.magnitude > 0.1f)
+        {
+            Vector3 snappedInput;
+            
+            if (Mathf.Abs(direction.x) > Mathf.Abs(direction.z))
+            {
+                snappedInput = new Vector3(Mathf.Sign(direction.x), 0, 0); 
+            }
+            else
+            {
+                snappedInput = new Vector3(0, 0, Mathf.Sign(direction.z)); 
+            }
+
+            lastFacingDirection = Quaternion.Euler(0, 45, 0) * snappedInput;
+        }
+        
+        if (currentState != States.Transported && currentState != States.Ejected && currentState != States.Pushing && currentState != States.Attacking)
         {
             ChangeState(direction.magnitude > 0.1f ? States.Walking : States.Idle);
         }
@@ -113,6 +133,7 @@ public class Player : MonoBehaviour
         switch (currentState)
         {
             case States.Idle:
+            case States.Attacking:
                 rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0); 
                 break;
             case States.Walking: 
@@ -245,6 +266,4 @@ public class Player : MonoBehaviour
         }
         return Vector3.zero;
     }
-    
 }
-
