@@ -12,6 +12,7 @@ public class DialogManager : MonoBehaviour
     public static DialogManager instance;
     public TMPro.TMP_Text nameText;
     public TMPro.TMP_Text phrasesText;
+    public Animator animator;
    
     void Start()
     {
