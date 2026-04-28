@@ -1,6 +1,8 @@
 using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
+
 namespace Hierarchy_Tools
 {
     [InitializeOnLoad]
@@ -141,3 +143,5 @@ namespace Hierarchy_Tools
         }
     }
 }
+
+#endif
