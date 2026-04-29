@@ -6,8 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/PuzzleProto.unity
-    guid: 6087053eecf110b48ae2bc1c79ef920a
+    path: Assets/Scenes/LD - Stoian/Blockout/Blockout 06.unity
+    guid: b2642f918d7660e44bba4a2aa5e602a7
+  - enabled: 1
+    path: Assets/Scenes/LD - Nicolas/Puzzle 04-05.unity
+    guid: 4d4745d9265111a4784eda44ead659a5
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
