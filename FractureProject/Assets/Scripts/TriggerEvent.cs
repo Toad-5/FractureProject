@@ -9,6 +9,7 @@ public class TriggerEvent : MonoBehaviour
     [SerializeField] private string targetTag;
     
      public bool isTalking;
+     public bool initDialog;
     
     public Dialogs dialogs;
 
@@ -18,8 +19,19 @@ public class TriggerEvent : MonoBehaviour
         {
             onTriggerEnterAction?.Invoke();
             isTalking = true;
+            
+            if (!initDialog)
+            {
+                initDialog = true;
+                DialogManager.instance.InitiateDialogue(dialogs);
+                Debug.Log("dialog initiated");
+            }
+        
+            DialogManager.instance.StartDialogue(dialogs);
         }
     }
+
+        
     
     //Nico
     private void OnTriggerExit(Collider other)
@@ -31,9 +43,4 @@ public class TriggerEvent : MonoBehaviour
         }
     }
     
-    //Emma
-    public void TriggerDialog ()
-    {
-        FindObjectOfType<DialogManager>().StartDialogue(dialogs);
-    }
 }
