@@ -441,7 +441,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4078033020676110778, guid: eb1d2d9716c0ec3479ed99fed3b26b8b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5249331064435803650, guid: eb1d2d9716c0ec3479ed99fed3b26b8b, type: 3}
       propertyPath: m_Pivot.x
@@ -537,6 +537,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8237474956919217279, guid: eb1d2d9716c0ec3479ed99fed3b26b8b, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649448837676654395, guid: eb1d2d9716c0ec3479ed99fed3b26b8b, type: 3}
+      propertyPath: m_CullTransparentMesh
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9134058058756908113, guid: eb1d2d9716c0ec3479ed99fed3b26b8b, type: 3}
@@ -6082,13 +6086,14 @@ GameObject:
   - component: {fileID: 575095357}
   - component: {fileID: 575095356}
   - component: {fileID: 575095355}
+  - component: {fileID: 575095359}
   m_Layer: 5
   m_Name: Canva (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &575095355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6172,6 +6177,28 @@ RectTransform:
   m_AnchoredPosition: {x: 0.38, y: 0.05}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!95 &575095359
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575095354}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a246f9c7de30b0a439785f9918d2ba85, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &582507614
 GameObject:
   m_ObjectHideFlags: 0
@@ -12227,7 +12254,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397378352}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: a246f9c7de30b0a439785f9918d2ba85, type: 2}
   m_CullingMode: 0
