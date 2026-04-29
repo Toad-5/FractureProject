@@ -21,7 +21,7 @@ public class UIPhoto : MonoBehaviour
         if (isActive)
         {
             panel.SetActive(true);
-            Time.timeScale = 0;
+            Player.instance.locked = true;
         }
         else
         {
