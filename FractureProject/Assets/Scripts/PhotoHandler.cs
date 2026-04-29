@@ -3,20 +3,15 @@ using UnityEngine;
 
 public class PhotoHandler : MonoBehaviour
 {
-    private SceneManager sceneManager;
-    private Action OnTransition;
+    [SerializeField] private UIPhoto uiPhoto;
     
     private bool playerNear;
-    
-    bool isSpaceUp;
 
     private void Start()
     {
-        sceneManager = SceneManager.Instance;
-        Debug.Log(sceneManager);
-        OnTransition += sceneManager.Temp;
+        uiPhoto = GameObject.Find("UI Photo").GetComponent<UIPhoto>();
     }
-    
+
     private void Update()
     {
         if (!playerNear) return;
@@ -29,7 +24,7 @@ public class PhotoHandler : MonoBehaviour
         }
     }
 
-    void OnTriggerStay(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -37,7 +32,7 @@ public class PhotoHandler : MonoBehaviour
         }
     }
 
-    void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -45,15 +40,8 @@ public class PhotoHandler : MonoBehaviour
         }
     }
 
-    void OpenPhoto()
+    private void OpenPhoto()
     {
-        Time.timeScale = 0;
-        // Call photo UI
-    }
-    
-    void CallTransition() //Call with UI button
-    {
-        Time.timeScale = 1;
-        OnTransition?.Invoke();
+        uiPhoto.ShowUI(true);
     }
 }
