@@ -27,7 +27,8 @@ public class SceneManager : MonoBehaviour
     public void Temp()
     {
         //Handle Transition visuals
-        
+
+        Debug.Log("Temp");
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
