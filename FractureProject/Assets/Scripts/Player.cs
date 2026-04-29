@@ -266,4 +266,9 @@ public class Player : MonoBehaviour
         }
         return Vector3.zero;
     }
+
+    public void LockPlayer(bool Locked)
+    {
+        locked = Locked;
+    }
 }
