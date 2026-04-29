@@ -1,6 +1,8 @@
 using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
+
 namespace Hierarchy_Tools
 {
     [FilePath("Hierarchy/HierarchyTree/Settings.asset", FilePathAttribute.Location.PreferencesFolder)]
@@ -80,3 +82,5 @@ namespace Hierarchy_Tools
         }
     }
 }
+
+#endif
