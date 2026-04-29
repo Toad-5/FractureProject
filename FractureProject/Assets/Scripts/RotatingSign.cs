@@ -12,26 +12,40 @@ public class RotatingSign : MonoBehaviour
     [Range(0f, 1f), Tooltip("Vibration légere")]
     public float highFrequency;
     public float rumbleDuration;
+    public SpriteRenderer lineSignRenderer;
+
+    private RotatingPanneau visuel;
     
     [Space]
-    
+
+
     public UnityEvent onInteraction;
-    private bool isPlayerNear;
+
+    private bool isPlayerNear, cooldown;
+    private void Start()
+    {
+        visuel = GetComponent<RotatingPanneau>();
+    }
+
     void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             isPlayerNear = true;
+            lineSignRenderer.color = new Color(1f, 1f, 1f, 1f);
             StartCoroutine(Rumble());
         }
         
     }
+    
 
     void OnTriggerExit(Collider collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             isPlayerNear = false;
+            lineSignRenderer.color = new Color(1f, 1f, 1f, 0f);
+
         }
     }
 
@@ -41,11 +55,23 @@ public class RotatingSign : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Q) || Input.GetButtonDown("Fire1"))
             {
+                if (cooldown) return;
+                cooldown = true;
+                StartCoroutine(Cooldown());
                 onInteraction.Invoke();
+                visuel.Turn();
             }
         }
     }
-    
+
+    public IEnumerator Cooldown()
+    {
+        yield return new WaitForSeconds(0.5f);
+        {
+            cooldown = false;
+        }
+    }
+
     private IEnumerator Rumble()
     {
         Gamepad gamepad = Gamepad.current;
