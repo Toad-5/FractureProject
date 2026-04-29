@@ -32,6 +32,7 @@ public class UIPhoto : MonoBehaviour
     public void CallTransition() //Call with UI button
     {
         Time.timeScale = 1;
+        Debug.Log("OnTransition Invoke");
         OnTransition?.Invoke();
         panel.SetActive(false);
     }
