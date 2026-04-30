@@ -61,7 +61,7 @@ public class DialogManager : MonoBehaviour
         
         while (sentencesQueue.Count > 0)
         {
-            while(!(Input.GetKeyDown(KeyCode.Space)||Input.GetButtonDown("Fire1")))
+            while(!(Input.GetKeyDown(KeyCode.Q)||Input.GetButtonDown("Fire1")))
             {
                 animatorUrsula.SetBool("reading", true);
                 animatorUrsula.SetBool("skipped", false);
@@ -81,7 +81,7 @@ public class DialogManager : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         
         EndDialogue();
     }
