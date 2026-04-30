@@ -14,16 +14,21 @@ public class DialogManager : MonoBehaviour
     public TMPro.TMP_Text phrasesText;
     public Animator animatorUrsula;
     public Animator animatorPNJ;
+    public Player controller;
    
     void Start()
     {
         if (instance != null)
         {
             Destroy(gameObject);
-            Debug.Log("the canvas just fucking died");
+            
+            Debug.Log("the canvas isn't there");
         }
+        
         instance = this;
+        
         sentencesQueue = new Queue<string>();
+        
         Debug.Log(sentencesQueue.Count);
     }
 
@@ -31,8 +36,11 @@ public class DialogManager : MonoBehaviour
     {
         Debug.Log("Starting to chat with " + dialogs.name);
         nameText.text = dialogs.name;
-        phrasesText.text = dialogs.sentences[0];
+        phrasesText.text = "...";
+        
         sentencesQueue.Clear();
+        
+        animatorUrsula.SetBool("start", true);
 
         foreach (string sentence in dialogs.sentences.ToList())
         {
@@ -43,31 +51,39 @@ public class DialogManager : MonoBehaviour
     public void StartDialogue(Dialogs dialogs)
     {
         StartCoroutine(DisplayNextSentence(dialogs));
+        
+        animatorUrsula.SetBool("start", false);
     }
 
     IEnumerator DisplayNextSentence(Dialogs dialogs)
     {
         Debug.Log("gonna chat soon");
-
+        
         while (sentencesQueue.Count > 0)
         {
             while(!(Input.GetKeyDown(KeyCode.Space)||Input.GetButtonDown("Fire1")))
             {
-                animatorUrsula.SetBool("skipped", false);
                 animatorUrsula.SetBool("reading", true);
- 
+                animatorUrsula.SetBool("skipped", false);
+                
                 yield return null;
             }
+            
             animatorUrsula.SetBool("reading", false);
             animatorUrsula.SetBool("skipped", true);
+            
             Debug.Log(sentencesQueue.First());
+            Debug.Log(sentencesQueue.Count);
+            
             phrasesText.text = sentencesQueue.First();
             sentencesQueue.Dequeue();
-            Debug.Log(sentencesQueue.Count);
+            
             yield return new WaitForEndOfFrame();
         }
-        EndDialogue();
         
+        yield return new WaitForSeconds(1);
+        
+        EndDialogue();
     }
 
     public void EndDialogue()
@@ -75,7 +91,9 @@ public class DialogManager : MonoBehaviour
         animatorUrsula.SetBool("reading", false);
         animatorUrsula.SetBool("skipped", false);
         animatorUrsula.SetBool("finished", true);
+        
         Debug.Log("Finished chatting.");
+        
         StopCoroutine("DisplayNextSentence");
     }
 }
