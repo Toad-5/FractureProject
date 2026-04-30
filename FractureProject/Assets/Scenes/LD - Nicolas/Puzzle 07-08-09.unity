@@ -3487,6 +3487,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 131697090432682658, guid: c20d3abaa01894445b60e5e26d8d81f1, type: 3}
+      propertyPath: origin
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 131697090432682658, guid: c20d3abaa01894445b60e5e26d8d81f1, type: 3}
+      propertyPath: 'angles.Array.data[0]'
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 131697090432682658, guid: c20d3abaa01894445b60e5e26d8d81f1, type: 3}
+      propertyPath: 'angles.Array.data[1]'
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469996702589648738, guid: c20d3abaa01894445b60e5e26d8d81f1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1144971907, guid: 670006e672ccf1f47aa175fa3b869af1, type: 3}
     - target: {fileID: 2408848689274293997, guid: c20d3abaa01894445b60e5e26d8d81f1, type: 3}
       propertyPath: onInteraction.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -3531,6 +3547,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Panneau (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 8417045097806634456, guid: c20d3abaa01894445b60e5e26d8d81f1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 312311925, guid: 2ac8615fbf8e920438472ca4d8e1c840, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5998,6 +6018,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 131697090432682658, guid: c20d3abaa01894445b60e5e26d8d81f1, type: 3}
+      propertyPath: origin
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 131697090432682658, guid: c20d3abaa01894445b60e5e26d8d81f1, type: 3}
+      propertyPath: 'angles.Array.data[0]'
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 131697090432682658, guid: c20d3abaa01894445b60e5e26d8d81f1, type: 3}
+      propertyPath: 'angles.Array.data[1]'
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469996702589648738, guid: c20d3abaa01894445b60e5e26d8d81f1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1884702608, guid: a6ddfc19fba08a047b47ed68e005003c, type: 3}
     - target: {fileID: 2408848689274293997, guid: c20d3abaa01894445b60e5e26d8d81f1, type: 3}
       propertyPath: onInteraction.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -6042,6 +6078,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Panneau (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 8417045097806634456, guid: c20d3abaa01894445b60e5e26d8d81f1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1369748539, guid: 8885ea21da9296046bcc870e4f09e719, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9698,6 +9738,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 131697090432682658, guid: c20d3abaa01894445b60e5e26d8d81f1, type: 3}
+      propertyPath: angles.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 131697090432682658, guid: c20d3abaa01894445b60e5e26d8d81f1, type: 3}
+      propertyPath: 'angles.Array.data[1]'
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 131697090432682658, guid: c20d3abaa01894445b60e5e26d8d81f1, type: 3}
+      propertyPath: 'angles.Array.data[2]'
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469996702589648738, guid: c20d3abaa01894445b60e5e26d8d81f1, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2408848689274293997, guid: c20d3abaa01894445b60e5e26d8d81f1, type: 3}
       propertyPath: onInteraction.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -9949,6 +10005,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 131697090432682658, guid: c20d3abaa01894445b60e5e26d8d81f1, type: 3}
+      propertyPath: origin
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 131697090432682658, guid: c20d3abaa01894445b60e5e26d8d81f1, type: 3}
+      propertyPath: 'angles.Array.data[0]'
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 131697090432682658, guid: c20d3abaa01894445b60e5e26d8d81f1, type: 3}
+      propertyPath: 'angles.Array.data[1]'
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469996702589648738, guid: c20d3abaa01894445b60e5e26d8d81f1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1310932903, guid: 4d9d473541e92c342a552e825d225040, type: 3}
     - target: {fileID: 2408848689274293997, guid: c20d3abaa01894445b60e5e26d8d81f1, type: 3}
       propertyPath: onInteraction.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -9961,6 +10033,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Panneau (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8417045097806634456, guid: c20d3abaa01894445b60e5e26d8d81f1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1369748539, guid: 8885ea21da9296046bcc870e4f09e719, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
