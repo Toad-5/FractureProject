@@ -10,6 +10,8 @@ public enum CrowdState
 
 public class CrowdNode
 {
+    public float occupiedQueueDistance = 0f; //TEST
+    
     public virtual CrowdNode nextNode { get; private set; }
     public Vector3 position;
 
@@ -48,6 +50,7 @@ public class CrowdNode
     public virtual void CheckObstacles()
     {
         if (this is ExitCrowdNode) return;
+        if (this.nextNode is ExitCrowdNode) return;
         
         CrowdNode targetNode = this.nextNode;
         if (this is StopCrowdNode stopNode) targetNode = stopNode.GetHiddenNode();

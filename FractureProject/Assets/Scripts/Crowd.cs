@@ -124,6 +124,7 @@ public class Crowd : MonoBehaviour
         return new CrowdNode(nodeObject.position, GenerateNodeByChildren(origin, nodeIndex+1), allNodesSet, stateListener);
     }
     
+    public event Action OnCrowdPathChanged;
     
     public void RefreshCrowdStates()
     {
@@ -162,6 +163,8 @@ public class Crowd : MonoBehaviour
                 }
             }
         }
+        
+        OnCrowdPathChanged?.Invoke();
     }
     
 }

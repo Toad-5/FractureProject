@@ -46,38 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CrowdDisplayer
   targetCrowd: {fileID: 0}
   atlas: {fileID: 4343727234628468602, guid: f4f69ff8cc723534ea4efe021a245da6, type: 2}
-  characters:
-  - {fileID: 21300000, guid: 3a059d67177780140b64e4bb913c8df0, type: 3}
-  - {fileID: 21300000, guid: 99c985d87ca86814582d11833e3a2831, type: 3}
-  - {fileID: 21300000, guid: af9e621af6b45fc45b65f68c647668c1, type: 3}
-  - {fileID: 21300000, guid: fd54541fc81072b4baa30990916c3199, type: 3}
-  - {fileID: 21300000, guid: 3643a0283d8ffe5428e9e8c9a1a573f5, type: 3}
-  - {fileID: 21300000, guid: 4cebf7d9249eee34686c553452e2e551, type: 3}
-  - {fileID: 21300000, guid: b8a96a220ebfe68418db6dac9b60aaf3, type: 3}
-  - {fileID: 21300000, guid: 15331cf32688bb44badddd86066a3484, type: 3}
-  - {fileID: 21300000, guid: 958968d7455b5ed459f4264c24e97c62, type: 3}
-  - {fileID: 21300000, guid: 45da0e6f89b437141a3fb388da474386, type: 3}
-  - {fileID: 21300000, guid: 2e994dd3c22cbe246aeab78e3478ee05, type: 3}
-  - {fileID: 21300000, guid: 78c84a6686a287440a138c52e72f50e1, type: 3}
-  - {fileID: 21300000, guid: 4d262c2b6632cea408265e8b6f0a986d, type: 3}
-  - {fileID: 21300000, guid: 719550062b270a641a27caee7a15ad1a, type: 3}
-  - {fileID: 21300000, guid: 28c6579d952ac594d89e30802ac1119a, type: 3}
-  - {fileID: 21300000, guid: 685af9865dccafb40ba041ef58ded639, type: 3}
-  - {fileID: 21300000, guid: d9b03eda105e0ea4a9c7ecd2a36f1e6b, type: 3}
-  - {fileID: 21300000, guid: 09f2e7f1f63b6884cb635adee6026b59, type: 3}
-  - {fileID: 21300000, guid: 1bf519053ea1c7146b03c87c7443e818, type: 3}
-  - {fileID: 21300000, guid: a1f329c5d07ac7345b3c8e448f3c1354, type: 3}
-  - {fileID: 21300000, guid: 933a2bdf550a0c2498c809f364e3e91b, type: 3}
-  - {fileID: 21300000, guid: c8b98ce6c4eaf204faf0019647a73c98, type: 3}
-  - {fileID: 21300000, guid: e60c40a7c1ee82641beb35a9f8c1862f, type: 3}
-  - {fileID: 21300000, guid: c46be7cc1291e7443a7fe170966ed223, type: 3}
-  - {fileID: 21300000, guid: 8f911fe4b1aad3e4db0698c311835e23, type: 3}
-  - {fileID: 21300000, guid: e84b7ce15df0c424dbba2a48a433473e, type: 3}
-  - {fileID: 21300000, guid: 1e9a135bb1e747347b549990695aa795, type: 3}
-  - {fileID: 21300000, guid: 12b82346636264b40b23e0bef42597f9, type: 3}
-  - {fileID: 21300000, guid: 24b01483212e2f04fb16ab8f8fd1f238, type: 3}
-  - {fileID: 21300000, guid: 30be2c2f43622654a9c9366d38bab411, type: 3}
   characterMesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
-  crowdMaterialTemplate: {fileID: 2100000, guid: 91df9494f041ac641a4d9cf2a3b65d81, type: 2}
+  crowdMaterialTemplate: {fileID: 2100000, guid: 0e3cd8506142fde47844c23f0cf8d887, type: 2}
   characterCount: 500
   moveSpeed: 3
+  catchUpSpeed: 10

@@ -26,7 +26,7 @@ Shader "Custom/CrowdDisplay"
 
             struct CharacterData {
                 float3 randomOffset;
-                float initialProgress;
+                float absoluteDistance;
                 float4 uvRect;
             };
 
@@ -44,7 +44,6 @@ Shader "Custom/CrowdDisplay"
             {
                 float4 positionCS : SV_POSITION;
                 float2 uv : TEXCOORD0;
-                float alpha : TEXCOORD1;
                 UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
@@ -69,24 +68,50 @@ Shader "Custom/CrowdDisplay"
 
                 CharacterData data = _CrowdBuffer[instanceID];
 
-                float progress = frac(data.initialProgress + _GlobalOffset);
+                // --- NOUVEAU : Mécanique de Despawn ---
+                // Si le script indique une largeur de 0, on annule l'affichage de ce vertex
+                if (data.uvRect.z == 0.0) 
+                {
+                    output.positionCS = float4(0, 0, 0, 0);
+                    output.uv = float2(0, 0);
+                    return output;
+                }
                 
-                float targetDistance = progress * _TotalPathLength;
+                float targetDistance = data.absoluteDistance + _GlobalOffset;
                 
                 int segmentIndex = 0;
                 float localProgress = 0.0;
                 
-                for(int i = 0; i < _WaypointCount - 1; i++) 
+                // 1. Exception si le personnage est en négatif (file d'attente)
+                if (targetDistance <= 0.0) 
                 {
-                    float distStart = _WaypointBuffer[i].w;
-                    float distEnd = _WaypointBuffer[i+1].w;
-                    
-                    if(targetDistance >= distStart && targetDistance <= distEnd) 
+                    segmentIndex = 0;
+                    float segmentLength = _WaypointBuffer[1].w - _WaypointBuffer[0].w;
+                    localProgress = targetDistance / max(0.001, segmentLength);
+                }
+                // 2. Exception si le personnage dépasse le bout (avant que le C# ne le rattrape ou despawn)
+                else if (targetDistance >= _TotalPathLength)
+                {
+                    segmentIndex = _WaypointCount - 2;
+                    float distStart = _WaypointBuffer[segmentIndex].w;
+                    float distEnd = _WaypointBuffer[segmentIndex+1].w;
+                    localProgress = (targetDistance - distStart) / max(0.001, distEnd - distStart);
+                }
+                // 3. Comportement normal sur le chemin
+                else 
+                {
+                    for(int i = 0; i < _WaypointCount - 1; i++) 
                     {
-                        segmentIndex = i;
-                        float segmentLength = distEnd - distStart;
-                        localProgress = (targetDistance - distStart) / max(0.001, segmentLength);
-                        break;
+                        float distStart = _WaypointBuffer[i].w;
+                        float distEnd = _WaypointBuffer[i+1].w;
+                        
+                        if(targetDistance >= distStart && targetDistance <= distEnd) 
+                        {
+                            segmentIndex = i;
+                            float segmentLength = distEnd - distStart;
+                            localProgress = (targetDistance - distStart) / max(0.001, segmentLength);
+                            break;
+                        }
                     }
                 }
 
@@ -112,8 +137,6 @@ Shader "Custom/CrowdDisplay"
                 output.positionCS = TransformWorldToHClip(finalWorldPos);
 
                 output.uv = input.uv * data.uvRect.zw + data.uvRect.xy;
-                
-                output.alpha = smoothstep(0.0, 0.05, progress) * (1.0 - smoothstep(0.95, 1.0, progress));
 
                 return output;
             }
@@ -122,7 +145,6 @@ Shader "Custom/CrowdDisplay"
             {
                 UNITY_SETUP_INSTANCE_ID(input);
                 half4 col = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, input.uv);
-                col.a *= input.alpha;
                 
                 clip(col.a - 0.1); 
                 
