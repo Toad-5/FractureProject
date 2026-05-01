@@ -8,8 +8,8 @@ public class TriggerEvent : MonoBehaviour
     
     [SerializeField] private string targetTag;
     
-     public bool isTalking;
-     public bool initDialog;
+    public bool isTalking;
+    public bool initDialog;
     
     public Dialogs dialogs;
 
@@ -20,7 +20,7 @@ public class TriggerEvent : MonoBehaviour
             onTriggerEnterAction?.Invoke();
             isTalking = true;
             
-            if (!initDialog)
+            if (!initDialog && dialogs !=null)
             {
                 initDialog = true;
                 DialogManager.instance.InitiateDialogue(dialogs);

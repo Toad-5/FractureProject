@@ -4,15 +4,17 @@ using UnityEngine;
 
 [System.Serializable]
 public class Dialogs : MonoBehaviour
-    {
-        public string name;
+{
+    public string name;
         
         [TextArea(3, 10)]
-        public string[] sentences;
+    public string[] sentences;
+    public bool ended;
 
-        public void PlayDialogue()
-        {
-            DialogManager.instance.StartDialogue(this);
-            DialogManager.instance.InitiateDialogue(this);
-        }
+    public void PlayDialogue()
+    {
+        if (ended) return;
+        DialogManager.instance.StartDialogue(this);
+        DialogManager.instance.InitiateDialogue(this);
     }
+}

@@ -44269,7 +44269,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1960245032}
   m_Layer: 0
-  m_Name: Nicolas prends cette merde!!!
+  m_Name: Canvas dialogues
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
