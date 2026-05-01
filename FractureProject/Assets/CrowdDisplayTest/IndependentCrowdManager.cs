@@ -71,7 +71,6 @@ public class IndependentCrowdManager : MonoBehaviour
         argsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
         argsBuffer.SetData(new uint[5] { characterMesh.GetIndexCount(0), (uint)characterCount, 0, 0, 0 });
 
-        // La foule fantôme écoute les changements !
         if (targetCrowd != null)
         {
             targetCrowd.OnCrowdPathChanged += UpdatePathData;
@@ -84,7 +83,7 @@ public class IndependentCrowdManager : MonoBehaviour
 
         int newWaypointCount = 0;
         float newAccumulatedDistance = 0f; 
-        CrowdNode currentNode = currentPathNodes[0]; // On retrace à partir du début de NOTRE bout de chemin
+        CrowdNode currentNode = currentPathNodes[0];
         Vector3 lastPosition = currentNode.position;
         
         Vector4[] newWaypoints = new Vector4[waypointPositions.Length];
@@ -122,7 +121,6 @@ public class IndependentCrowdManager : MonoBehaviour
         
         if (newWaypointCount < 2) return;
 
-        // Si le chemin s'est encore raccourci, on scinde !
         if (totalPathLength > 0f && commonPathLength < totalPathLength)
         {
             CrowdNode splitNode = null;
@@ -158,7 +156,7 @@ public class IndependentCrowdManager : MonoBehaviour
 
         for (int i = 0; i < characterCount; i++)
         {
-            if (cpuData[i].uvRect.z == 0f) continue; // Ignorer ceux qui ont déjà despawn
+            if (cpuData[i].uvRect.z == 0f) continue;
 
             float currentRealPos = cpuData[i].absoluteDistance + localOffset;
             if (cutLength < oldLength && currentRealPos > cutLength)
@@ -177,7 +175,6 @@ public class IndependentCrowdManager : MonoBehaviour
             CrowdNode[] oldNodes = new CrowdNode[currentWaypointCount];
             System.Array.Copy(currentPathNodes, oldNodes, currentWaypointCount);
 
-            // On engendre un SOUS-fantôme !
             GameObject go = new GameObject("IndependentCrowd_Cut_Sub");
             IndependentCrowdManager mgr = go.AddComponent<IndependentCrowdManager>();
             
@@ -193,9 +190,9 @@ public class IndependentCrowdManager : MonoBehaviour
 
             float currentRealPos = cpuData[i].absoluteDistance + localOffset;
             if (currentRealPos > cutLength) {
-                cpuData[i].uvRect.z = 0f; // On tue l'original puisqu'il a été transmis au sous-fantôme
+                cpuData[i].uvRect.z = 0f;
             } else {
-                cpuData[i].absoluteDistance = currentRealPos; // On fige l'offset
+                cpuData[i].absoluteDistance = currentRealPos;
             }
         }
         localOffset = 0f;
@@ -248,7 +245,7 @@ public class IndependentCrowdManager : MonoBehaviour
                 }
                 else
                 {
-                    activeCount++; // On compte combien il reste de survivants
+                    activeCount++;
                 }
             }
         }
@@ -259,7 +256,6 @@ public class IndependentCrowdManager : MonoBehaviour
 
         Graphics.DrawMeshInstancedIndirect(characterMesh, 0, materialTemplate, new Bounds(Vector3.zero, Vector3.one * 1000), argsBuffer, 0, propertyBlock);
 
-        // Nettoyage automatique ! Si le fantôme est vide, il s'auto-détruit.
         if (activeCount == 0)
         {
             Destroy(gameObject);

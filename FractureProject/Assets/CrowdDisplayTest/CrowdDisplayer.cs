@@ -23,7 +23,7 @@ public class CrowdDisplayer : MonoBehaviour
     private ComputeBuffer argsBuffer;
     private ComputeBuffer waypointBuffer; 
     private Vector4[] waypointPositions;
-    private CrowdNode[] currentPathNodes; // NOUVEAU : Traçage des anciens nodes
+    private CrowdNode[] currentPathNodes;
     
     private float globalOffset = 0f;
     private MaterialPropertyBlock propertyBlock;
@@ -69,7 +69,7 @@ public class CrowdDisplayer : MonoBehaviour
 
         int maxPossibleNodes = targetCrowd.allNodes.Length;
         waypointPositions = new Vector4[maxPossibleNodes];
-        currentPathNodes = new CrowdNode[maxPossibleNodes]; // NOUVEAU
+        currentPathNodes = new CrowdNode[maxPossibleNodes];
         waypointBuffer = new ComputeBuffer(maxPossibleNodes, 16); 
         propertyBlock.SetBuffer("_WaypointBuffer", waypointBuffer);
 
@@ -93,7 +93,6 @@ public class CrowdDisplayer : MonoBehaviour
         bool diverged = false;
         int divergeIndex = -1;
 
-        // 1. Parcours du chemin depuis le node d'entrée
         while (currentNode != null)
         {
             newAccumulatedDistance += Vector3.Distance(lastPosition, currentNode.position);
@@ -130,18 +129,15 @@ public class CrowdDisplayer : MonoBehaviour
         
         if (newWaypointCount < 2) return;
 
-        // 2. Détection de coupure (Switch ou Stop)
         if (currentPathLength > 0f && commonPathLength < currentPathLength)
         {
             CrowdNode splitNode = null;
             if (divergeIndex >= 0 && divergeIndex < currentWaypointCount) 
             {
-                // Cas "Switch" : Le chemin bifurque sur un autre Node
                 splitNode = currentPathNodes[divergeIndex]; 
             } 
             else if (newWaypointCount < currentWaypointCount) 
             {
-                // Cas "Stop" : Le chemin s'arrête brusquement plus tôt
                 splitNode = currentPathNodes[newWaypointCount];
             }
 
@@ -154,7 +150,6 @@ public class CrowdDisplayer : MonoBehaviour
             hasStartedLooping = false;
         }
 
-        // 3. Mise à jour des données locales et GPU
         currentPathLength = newAccumulatedDistance;
         currentWaypointCount = newWaypointCount;
 
@@ -169,7 +164,6 @@ public class CrowdDisplayer : MonoBehaviour
         propertyBlock.SetFloat("_TotalPathLength", currentPathLength);
     }
     
-    // NOUVELLE FONCTION : Gère la création de la sous-foule
     void ExtractCutCharacters(float oldLength, float cutLength, CrowdNode refNode)
     {
         if (refNode == null) return;
@@ -177,7 +171,6 @@ public class CrowdDisplayer : MonoBehaviour
         crowdBuffer.GetData(cpuData);
         System.Collections.Generic.List<CharacterData> cutChars = new System.Collections.Generic.List<CharacterData>();
 
-        // Extraction des personnages qui se trouvent dans la zone coupée
         for (int i = 0; i < characterCount; i++)
         {
             float currentRealPos = cpuData[i].absoluteDistance + globalOffset;
@@ -190,14 +183,11 @@ public class CrowdDisplayer : MonoBehaviour
             }
         }
 
-        // Création de la foule fantôme si on a isolé des personnages
         if (cutChars.Count > 0)
         {
-            // Sauvegarde de l'ancienne trajectoire spatiale
             Vector4[] oldPath = new Vector4[currentWaypointCount];
             System.Array.Copy(waypointPositions, oldPath, currentWaypointCount);
 
-            // Sauvegarde de l'ancien réseau logique (Nodes)
             CrowdNode[] oldNodes = new CrowdNode[currentWaypointCount];
             System.Array.Copy(currentPathNodes, oldNodes, currentWaypointCount);
 
@@ -206,7 +196,6 @@ public class CrowdDisplayer : MonoBehaviour
             
             Texture tex = (characters != null && characters.Length > 0) ? characters[0].texture : null;
             
-            // Initialisation avec catchUpSpeed et la référence à "this" (targetCrowd)
             mgr.Initialize(cutChars.ToArray(), oldPath, oldNodes, currentWaypointCount, oldLength, refNode, characterMesh, crowdMaterialTemplate, tex, catchUpSpeed, targetCrowd);
         }
     }

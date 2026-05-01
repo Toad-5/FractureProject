@@ -10,8 +10,6 @@ public enum CrowdState
 
 public class CrowdNode
 {
-    public float occupiedQueueDistance = 0f; //TEST
-    
     public virtual CrowdNode nextNode { get; private set; }
     public Vector3 position;
 
