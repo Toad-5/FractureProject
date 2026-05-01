@@ -41,7 +41,6 @@ public class DialogManager : MonoBehaviour
         
         sentencesQueue.Clear();
         
-        animatorUrsula.SetBool("start", true);
 
         foreach (string sentence in dialogs.sentences.ToList())
         {
@@ -53,25 +52,23 @@ public class DialogManager : MonoBehaviour
     {
         StartCoroutine(DisplayNextSentence(dialogs));
         
-        animatorUrsula.SetBool("start", false);
     }
 
     IEnumerator DisplayNextSentence(Dialogs dialogs)
     {
         Debug.Log("gonna chat soon");
-        
+        if (!dialogs) yield break;
         while (sentencesQueue.Count > 0)
         {
+            if (!dialogs.ended) animatorUrsula.SetTrigger("Start");
             while(!(Input.GetKeyDown(KeyCode.Q)||Input.GetButtonDown("Fire1")))
             {
-                animatorUrsula.SetBool("reading", true);
-                animatorUrsula.SetBool("skipped", false);
                 
                 yield return null;
             }
-            
-            animatorUrsula.SetBool("reading", false);
-            animatorUrsula.SetBool("skipped", true);
+
+            animatorUrsula.SetTrigger("Next");
+
             
             Debug.Log(sentencesQueue.First());
             Debug.Log(sentencesQueue.Count);
@@ -83,7 +80,7 @@ public class DialogManager : MonoBehaviour
         }
         
         yield return new WaitForSeconds(2);
-        
+        dialogs.ended = true;
         EndDialogue();
 
         //trigger.SetActive(false);
@@ -91,9 +88,8 @@ public class DialogManager : MonoBehaviour
 
     public void EndDialogue()
     {
-        animatorUrsula.SetBool("reading", false);
-        animatorUrsula.SetBool("skipped", false);
-        animatorUrsula.SetBool("finished", true);
+
+        animatorUrsula.SetTrigger("End");
         
         Debug.Log("Finished chatting.");
         
