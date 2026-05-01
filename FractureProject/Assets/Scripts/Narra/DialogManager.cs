@@ -15,15 +15,16 @@ public class DialogManager : MonoBehaviour
     public Animator animatorUrsula;
     public Animator animatorPNJ;
     public Player controller;
+   // public GameObject trigger;
    
     void Start()
     {
-        if (instance != null)
-        {
-            Destroy(gameObject);
+        //if (instance != null)
+        //{
+            //Destroy(gameObject);
             
-            Debug.Log("the canvas isn't there");
-        }
+            //Debug.Log("the dialog manager isn't there");
+        //}
         
         instance = this;
         
@@ -84,6 +85,8 @@ public class DialogManager : MonoBehaviour
         yield return new WaitForSeconds(2);
         
         EndDialogue();
+
+        //trigger.SetActive(false);
     }
 
     public void EndDialogue()

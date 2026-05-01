@@ -26,7 +26,7 @@ public class TriggerEvent : MonoBehaviour
                 DialogManager.instance.InitiateDialogue(dialogs);
                 Debug.Log("dialog initiated");
             }
-        
+            
             DialogManager.instance.StartDialogue(dialogs);
         }
     }
