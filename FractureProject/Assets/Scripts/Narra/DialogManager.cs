@@ -1,63 +1,102 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class DialogManager : MonoBehaviour
 {
-    private Queue<string> sentences;
+    private Queue<string> sentencesQueue;
     public TriggerEvent TriggerEvent;
     public static DialogManager instance;
     public TMPro.TMP_Text nameText;
     public TMPro.TMP_Text phrasesText;
-
+    public Animator animatorUrsula;
+    public Animator animatorPNJ;
+    public Player controller;
+   // public GameObject trigger;
+   
     void Start()
     {
-        if (instance != null)
-        {
-            Destroy(gameObject);
-            Debug.Log("the canvas just fucking died");
-        }
+        //if (instance != null)
+        //{
+            //Destroy(gameObject);
+            
+            //Debug.Log("the dialog manager isn't there");
+        //}
+        
         instance = this;
         
-        sentences = new Queue<string>();
-        Debug.Log(sentences.Count);
+        sentencesQueue = new Queue<string>();
+        
+        Debug.Log(sentencesQueue.Count);
     }
 
-    public void StartDialogue(Dialogs dialogs)
+    public void InitiateDialogue(Dialogs dialogs)
     {
         Debug.Log("Starting to chat with " + dialogs.name);
         nameText.text = dialogs.name;
-        sentences.Clear();
+        phrasesText.text = "...";
+        
+        sentencesQueue.Clear();
+        
+        animatorUrsula.SetBool("start", true);
 
-        foreach (string sentence in dialogs.sentences)
+        foreach (string sentence in dialogs.sentences.ToList())
         {
-            sentences.Enqueue(sentence);
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Debug.Log("tkt ça marche");
-                sentences.Dequeue();
-                Debug.Log(sentence);
-            }
+            sentencesQueue.Enqueue(sentence);
         }
-
-        DisplayNextSentence();
+    }
+    
+    public void StartDialogue(Dialogs dialogs)
+    {
+        StartCoroutine(DisplayNextSentence(dialogs));
+        
+        animatorUrsula.SetBool("start", false);
     }
 
-    public void DisplayNextSentence()
+    IEnumerator DisplayNextSentence(Dialogs dialogs)
     {
-        if (sentences.Count == 0)
+        Debug.Log("gonna chat soon");
+        
+        while (sentencesQueue.Count > 0)
         {
-            EndDialogue();
-            return;
+            while(!(Input.GetKeyDown(KeyCode.Q)||Input.GetButtonDown("Fire1")))
+            {
+                animatorUrsula.SetBool("reading", true);
+                animatorUrsula.SetBool("skipped", false);
+                
+                yield return null;
+            }
+            
+            animatorUrsula.SetBool("reading", false);
+            animatorUrsula.SetBool("skipped", true);
+            
+            Debug.Log(sentencesQueue.First());
+            Debug.Log(sentencesQueue.Count);
+            
+            phrasesText.text = sentencesQueue.First();
+            sentencesQueue.Dequeue();
+            
+            yield return new WaitForEndOfFrame();
         }
+        
+        yield return new WaitForSeconds(2);
+        
+        EndDialogue();
 
-        string sentence = sentences.Dequeue();
-        phrasesText.text = sentence;
-        Debug.Log(sentence);
+        //trigger.SetActive(false);
     }
 
     public void EndDialogue()
     {
+        animatorUrsula.SetBool("reading", false);
+        animatorUrsula.SetBool("skipped", false);
+        animatorUrsula.SetBool("finished", true);
+        
         Debug.Log("Finished chatting.");
+        
+        StopCoroutine("DisplayNextSentence");
     }
 }

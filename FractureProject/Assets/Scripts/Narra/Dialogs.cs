@@ -13,5 +13,6 @@ public class Dialogs : MonoBehaviour
         public void PlayDialogue()
         {
             DialogManager.instance.StartDialogue(this);
+            DialogManager.instance.InitiateDialogue(this);
         }
     }
