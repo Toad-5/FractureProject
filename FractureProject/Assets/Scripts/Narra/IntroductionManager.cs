@@ -65,6 +65,12 @@ public class IntroductionManager : MonoBehaviour
         foreach (GameObject obj in step.objectsToActivate)
         {
             obj.SetActive(true);
+            
+            Animator anim = obj.GetComponent<Animator>();
+            if (anim != null)
+            {
+                anim.SetTrigger("Show");
+            }
         }
 
         foreach (GameObject obj in step.objectsToDeactivate)
