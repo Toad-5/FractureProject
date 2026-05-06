@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1580101640961193302}
   - component: {fileID: 8339545491190032454}
   m_Layer: 0
-  m_Name: 'Global Volume LUT '
+  m_Name: GV_Flashback
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
