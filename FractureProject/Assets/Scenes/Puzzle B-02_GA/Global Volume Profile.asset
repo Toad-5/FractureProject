@@ -109,13 +109,13 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.90187836, z: 0.8519851, w: 0}
+    m_Value: {x: 1, y: 0.90567654, z: 0.8696258, w: 0}
   midtones:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.96273106, z: 0.87067354, w: 0}
+    m_Value: {x: 0.99279416, y: 1, z: 0.9428048, w: 0}
   highlights:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.92778975, z: 0.79750824, w: -0.034904286}
+    m_Value: {x: 0.99684525, y: 1, z: 0.95651424, w: -0.034904286}
   shadowsStart:
     m_OverrideState: 0
     m_Value: 0
