@@ -11,7 +11,7 @@ public class IntroductionManager : MonoBehaviour
         public float timeBeforeNextStep;
     }
     
-    private List<Step> steps = new List<Step>();
+    public List<Step> steps = new List<Step>();
 
     private int currentStepIndex = -1;
     private float timer = 0f;
@@ -40,7 +40,7 @@ public class IntroductionManager : MonoBehaviour
         }
     }
 
-    public void NextStep()
+    void NextStep()
     {
         currentStepIndex++;
         timer = 0f;
@@ -56,7 +56,7 @@ public class IntroductionManager : MonoBehaviour
         }
     }
 
-    public void ExecuteStep(Step step)
+    void ExecuteStep(Step step)
     {
         foreach (GameObject obj in step.objectsToActivate)
         {
