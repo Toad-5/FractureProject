@@ -936,7 +936,7 @@ GameObject:
   - component: {fileID: 1896263802}
   - component: {fileID: 1896263801}
   m_Layer: 5
-  m_Name: WEST-BERLIN
+  m_Name: Location
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1121,7 +1121,7 @@ GameObject:
   - component: {fileID: 2144086744}
   - component: {fileID: 2144086747}
   m_Layer: 5
-  m_Name: november 1989
+  m_Name: Date
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

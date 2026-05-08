@@ -6,15 +6,12 @@ public class IntroductionManager : MonoBehaviour
     [System.Serializable]
     public class Step
     {
-        [Header("Actions à l'entrée de l'étape")]
         public List<GameObject> objectsToActivate;
         public List<GameObject> objectsToDeactivate;
-        
-        [Header("Timing")]
         public float timeBeforeNextStep;
     }
     
-    public List<Step> steps = new List<Step>();
+    private List<Step> steps = new List<Step>();
 
     private int currentStepIndex = -1;
     private float timer = 0f;
@@ -55,7 +52,6 @@ public class IntroductionManager : MonoBehaviour
         else
         {
             isIntroFinished = true;
-            Debug.Log("Fin de l'introduction");
             this.gameObject.SetActive(false);
         }
     }

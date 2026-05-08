@@ -13,8 +13,6 @@ public class RealTimeTypewriter : MonoBehaviour
     private int i;
     private int j;
 
-    private char endCharacter;
-
     void Start()
     {
         textDisplay.text = "";
@@ -63,8 +61,6 @@ public class RealTimeTypewriter : MonoBehaviour
             if (i == textToDisplay.Count)
             {
                 hasToWrite = false;
-                endCharacter = '.';
-                typingSpeed *= 4;
             }
         }
     }
