@@ -46,13 +46,9 @@ public class RealTimeTypewriter : MonoBehaviour
     {
         char character = textToDisplay[i][j];
 
-        if (character == '¤') // Allow pauses in tht typing process
+        if (character == '¤')
         {
 
-        }
-        else if (character == 'µ')
-        {
-            SelectorAnimation();
         }
         else
         {
@@ -70,29 +66,6 @@ public class RealTimeTypewriter : MonoBehaviour
                 endCharacter = '.';
                 typingSpeed *= 4;
             }
-            else
-            {
-                textDisplay.text = "█";
-            }
-        }
-    }
-
-    void SelectorAnimation()
-    {
-        string _tempTxt;
-        if (textDisplay.text.Length == 0)
-        {
-            return;
-        }
-
-        if (textDisplay.text[^1] != '█')
-        {
-            textDisplay.text += '█';
-        }
-        else
-        {
-            _tempTxt = textDisplay.text.Remove(textDisplay.text.Length - 1);
-            textDisplay.text = _tempTxt;
         }
     }
 }
