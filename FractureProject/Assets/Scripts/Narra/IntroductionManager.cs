@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class IntroductionManager : MonoBehaviour
@@ -42,6 +43,8 @@ public class IntroductionManager : MonoBehaviour
 
     void NextStep()
     {
+        if (isIntroFinished) return;
+        
         currentStepIndex++;
         timer = 0f;
 
@@ -51,9 +54,23 @@ public class IntroductionManager : MonoBehaviour
         }
         else
         {
-            isIntroFinished = true;
-            this.gameObject.SetActive(false);
+            StartCoroutine(FinishIntroRoutine());
         }
+    }
+    
+    private IEnumerator FinishIntroRoutine()
+    {
+        isIntroFinished = true;
+
+        Animator canvasAnim = GetComponent<Animator>();
+    
+        if (canvasAnim != null)
+        {
+            canvasAnim.SetTrigger("FinalExit");
+            yield return new WaitForSeconds(5f);
+        }
+
+        this.gameObject.SetActive(false); 
     }
 
     void ExecuteStep(Step step)
