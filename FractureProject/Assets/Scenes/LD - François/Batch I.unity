@@ -5836,7 +5836,6 @@ GameObject:
   m_Component:
   - component: {fileID: 180847501}
   - component: {fileID: 180847503}
-  - component: {fileID: 180847502}
   m_Layer: 0
   m_Name: '*T1 End*'
   m_TagString: Untagged
@@ -5860,18 +5859,6 @@ Transform:
   - {fileID: 1171300465}
   m_Father: {fileID: 1189823859}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &180847502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 180847500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cecbe06fea843af45ac0333f44a673d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StopNodeEvent
 --- !u!114 &180847503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8437,7 +8424,7 @@ Transform:
   m_GameObject: {fileID: 248382595}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 61.5, y: 0, z: -0.000006020069}
+  m_LocalPosition: {x: 62.63852, y: 0, z: -0.0000061392784}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -31981,7 +31968,7 @@ Transform:
   m_GameObject: {fileID: 917335029}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.70710677, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 97.965454, y: 0.9116411, z: -360.55417}
+  m_LocalPosition: {x: 97.965454, y: 1.26, z: -360.55417}
   m_LocalScale: {x: 1.9605, y: 0.43131, z: 1.9605}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -40432,7 +40419,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1171300465}
   - component: {fileID: 1171300467}
-  - component: {fileID: 1171300466}
   m_Layer: 0
   m_Name: '*T1 End* (1)'
   m_TagString: Untagged
@@ -40455,18 +40441,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 180847501}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1171300466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1171300464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cecbe06fea843af45ac0333f44a673d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StopNodeEvent
 --- !u!114 &1171300467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43600,6 +43574,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 712868875}
+        m_TargetAssemblyTypeName: StopNodeEvent, Assembly-CSharp
+        m_MethodName: SetStop
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1186674086}
+        m_TargetAssemblyTypeName: StopNodeEvent, Assembly-CSharp
+        m_MethodName: SetStop
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   onTriggerExitAction:
     m_PersistentCalls:
       m_Calls:
@@ -43607,6 +43605,30 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: SwitchNodeEvent, Assembly-CSharp
         m_MethodName: SwitchEvent
         m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 712868875}
+        m_TargetAssemblyTypeName: StopNodeEvent, Assembly-CSharp
+        m_MethodName: SetStop
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1186674086}
+        m_TargetAssemblyTypeName: StopNodeEvent, Assembly-CSharp
+        m_MethodName: SetStop
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -55422,6 +55444,7 @@ MonoBehaviour:
   characterCount: 250
   moveSpeed: 3
   catchUpSpeed: 0
+  characterRotationY: 0
 --- !u!4 &1622800216 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4738697705291396099, guid: 9d8f68fe07ce64148a4e7999cc8976f5, type: 3}
@@ -55592,7 +55615,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4320371009729194558, guid: 2ba6749c88181eb469ec66fb32349688, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -49.471203
+      value: 107.43727
       objectReference: {fileID: 0}
     - target: {fileID: 4320371009729194558, guid: 2ba6749c88181eb469ec66fb32349688, type: 3}
       propertyPath: m_LocalPosition.y
@@ -55600,7 +55623,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4320371009729194558, guid: 2ba6749c88181eb469ec66fb32349688, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -247.9432
+      value: -362.5585
       objectReference: {fileID: 0}
     - target: {fileID: 4320371009729194558, guid: 2ba6749c88181eb469ec66fb32349688, type: 3}
       propertyPath: m_LocalRotation.w
