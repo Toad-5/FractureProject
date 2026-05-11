@@ -7,6 +7,7 @@ Shader "Custom/CrowdDisplay"
         _Width ("Largeur de la foule", Float) = 2.0
         _BounceSpeed ("Bounce Speed", Float) = 5
         _BounceAmp ("Bounce Amplitude", Float) = 0.2
+        _RotationY ("Rotation Y", Float) = 0.0
     }
 
     SubShader
@@ -58,6 +59,7 @@ Shader "Custom/CrowdDisplay"
                 float _BounceAmp;
                 int _WaypointCount;
                 float _TotalPathLength;
+                float _RotationY;
             CBUFFER_END
 
             Varyings vert(Attributes input, uint instanceID : SV_InstanceID)
@@ -68,8 +70,6 @@ Shader "Custom/CrowdDisplay"
 
                 CharacterData data = _CrowdBuffer[instanceID];
 
-                // --- NOUVEAU : Mécanique de Despawn ---
-                // Si le script indique une largeur de 0, on annule l'affichage de ce vertex
                 if (data.uvRect.z == 0.0) 
                 {
                     output.positionCS = float4(0, 0, 0, 0);
@@ -82,14 +82,12 @@ Shader "Custom/CrowdDisplay"
                 int segmentIndex = 0;
                 float localProgress = 0.0;
                 
-                // 1. Exception si le personnage est en négatif (file d'attente)
                 if (targetDistance <= 0.0) 
                 {
                     segmentIndex = 0;
                     float segmentLength = _WaypointBuffer[1].w - _WaypointBuffer[0].w;
                     localProgress = targetDistance / max(0.001, segmentLength);
                 }
-                // 2. Exception si le personnage dépasse le bout (avant que le C# ne le rattrape ou despawn)
                 else if (targetDistance >= _TotalPathLength)
                 {
                     segmentIndex = _WaypointCount - 2;
@@ -97,7 +95,6 @@ Shader "Custom/CrowdDisplay"
                     float distEnd = _WaypointBuffer[segmentIndex+1].w;
                     localProgress = (targetDistance - distStart) / max(0.001, distEnd - distStart);
                 }
-                // 3. Comportement normal sur le chemin
                 else 
                 {
                     for(int i = 0; i < _WaypointCount - 1; i++) 
@@ -133,6 +130,17 @@ Shader "Custom/CrowdDisplay"
                 worldPos.y += bounce;
 
                 float3 scaledPositionOS = input.positionOS.xyz * _Scale.xyz;
+                
+                float radY = radians(_RotationY);
+                float cosY = cos(radY);
+                float sinY = sin(radY);
+                
+                float xRot = scaledPositionOS.x * cosY - scaledPositionOS.z * sinY;
+                float zRot = scaledPositionOS.x * sinY + scaledPositionOS.z * cosY;
+                
+                scaledPositionOS.x = xRot;
+                scaledPositionOS.z = zRot;
+                
                 float3 finalWorldPos = worldPos + scaledPositionOS; 
                 output.positionCS = TransformWorldToHClip(finalWorldPos);
 
