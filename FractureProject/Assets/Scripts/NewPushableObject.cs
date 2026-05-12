@@ -18,7 +18,7 @@ public class NewPushableObject : MonoBehaviour
     private Rigidbody rb;
     private BoxCollider boxCol;
 
-    public bool isPlayerNear, onX, onZ;
+    public bool isPlayerNear = false, onX, onZ, inPlayed, outPlayed;
     
     private void Start()
     {
@@ -28,15 +28,23 @@ public class NewPushableObject : MonoBehaviour
         if (spriteWhenPush == null)
             spriteWhenPush = baseSprite;
         
-        rb.isKinematic = true; 
+        rb.isKinematic = true;
+        outPlayed = true;
     }
 
     private void Update()
     {
         if (isPlayerNear)
         {
+            
             spriteRenderer.sprite = spriteWhenPush;
             if (isMoving) return;
+            if (!inPlayed)
+            {
+                inPlayed = true;
+                outPlayed = false;
+                SoundManager.PlaySound("Interact In");
+            }
             if (Input.GetKey(KeyCode.Q) || Input.GetButton("Fire1"))
             {
                 
@@ -87,11 +95,18 @@ public class NewPushableObject : MonoBehaviour
             {
                 Player.instance.locked = false;
                 Player.instance.ChangeState(Player.States.Walking);
+                
             }
         }
         else
         {
             spriteRenderer.sprite = baseSprite;
+            if (!outPlayed)
+            {
+                outPlayed = true;
+                inPlayed = false;
+                SoundManager.PlaySound("Interact Out");
+            }
         }
     }
 
@@ -114,7 +129,7 @@ public class NewPushableObject : MonoBehaviour
 
         bool isBlocked = Physics.BoxCast(center, testSize, direction, transform.rotation, unitsPerPush, obstacleLayer);
 
-        if (!isBlocked)
+        if (!isBlocked && direction.magnitude > 0.01f)
         {
             StartCoroutine(Push(direction));
         }
@@ -147,6 +162,8 @@ public class NewPushableObject : MonoBehaviour
         rb.MovePosition(targetPos);
         pushTimer = 0f;
         isMoving = false;
+        SoundManager.PlaySound("Push",0.2f);
+
 
         if (gamepad != null)
         {

@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 using AYellowpaper.SerializedCollections;
+using Random = UnityEngine.Random;
 
 public class SoundManager : MonoBehaviour
 {
@@ -15,9 +16,6 @@ public class SoundManager : MonoBehaviour
     [SerializedDictionary("nom","AudioClip")]
     public SerializedDictionary<string, AudioClip> sfx = new SerializedDictionary<string, AudioClip>();
     
-    [SerializedDictionary("nom","Musiqie")]
-    public SerializedDictionary<string, AudioClip> musiques = new SerializedDictionary<string, AudioClip>();
-
     private void Awake()
     {
         if (Instance != null)
@@ -29,19 +27,30 @@ public class SoundManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public static void PlaySound(string name)
+    public static void PlaySound(string name, float pitchRandomness = 0f)
     {
+        if (!Instance)
+        {
+            Debug.LogWarning("SoundManager missing");
+            return;
+        }
+        Instance.audioSource.pitch = 1 + (Random.Range(-pitchRandomness,pitchRandomness));
         Instance.audioSource.PlayOneShot(Instance.sfx[name]);
     }
 
-    public static void PlayMusic(string name)
+    public static void PlayMusic(AudioClip clip)
     {
+        if (!Instance)
+        {
+            Debug.LogWarning("SoundManager missing");
+            return;
+        }
         if (Instance.musicTransition == null)
-            Instance.musicTransition = Instance.StartCoroutine(Instance.MusicTransition(Instance.musiques[name]));
+            Instance.musicTransition = Instance.StartCoroutine(Instance.MusicTransition(clip));
         else 
         { 
             Instance.StopCoroutine(Instance.musicTransition); 
-            Instance.musicTransition = Instance.StartCoroutine(Instance.MusicTransition(Instance.musiques[name]));
+            Instance.musicTransition = Instance.StartCoroutine(Instance.MusicTransition(clip));
         }
     }
 

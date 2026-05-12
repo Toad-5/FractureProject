@@ -85,7 +85,7 @@ public class IntroductionManager : MonoBehaviour
                 anim.SetTrigger("Show");
             }
         }
-
+        
         foreach (GameObject obj in step.objectsToDeactivate)
         {
             obj.SetActive(false);

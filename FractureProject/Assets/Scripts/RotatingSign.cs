@@ -34,8 +34,8 @@ public class RotatingSign : MonoBehaviour
             isPlayerNear = true;
             lineSignRenderer.color = new Color(1f, 1f, 1f, 1f);
             StartCoroutine(Rumble());
+            SoundManager.PlaySound("Interact In");
         }
-        
     }
     
 
@@ -45,8 +45,10 @@ public class RotatingSign : MonoBehaviour
         {
             isPlayerNear = false;
             lineSignRenderer.color = new Color(1f, 1f, 1f, 0f);
+            SoundManager.PlaySound("Interact Out");
 
         }
+
     }
 
     private void Update()

@@ -46,12 +46,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2f3ac7c78763414f8312231d7bf8ab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  musicSource0: {fileID: 0}
-  musicSource1: {fileID: 0}
+  musicSource0: {fileID: 7509431380251440420}
+  musicSource1: {fileID: 6070415716647950328}
   sfx:
     _serializedList:
-    - Key: 
-      Value: {fileID: 0}
+    - Key: Click
+      Value: {fileID: 8300000, guid: 8704972d56ef22248bd2d698136b4307, type: 3}
+    - Key: TypeWriter
+      Value: {fileID: 8300000, guid: ad21cd26696edca4ebbabec8a0a22444, type: 3}
+    - Key: Interact In
+      Value: {fileID: 8300000, guid: ac0f4d683b7483f4b8aa604bd67da6c0, type: 3}
+    - Key: Interact Out
+      Value: {fileID: 8300000, guid: 04b311c85a787c54389056e042f30f61, type: 3}
+    - Key: Sign Flip
+      Value: {fileID: 8300000, guid: 111dff5dd09465b439cef0b582d2ad02, type: 3}
+    - Key: Push
+      Value: {fileID: 8300000, guid: 756769dc203cc1f43bc56a471faf00ed, type: 3}
   musiques:
     _serializedList: []
 --- !u!82 &9050403824353793962
@@ -196,7 +206,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -293,10 +303,10 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
