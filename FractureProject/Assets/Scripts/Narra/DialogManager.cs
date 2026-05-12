@@ -14,8 +14,8 @@ public class DialogManager : MonoBehaviour
     public TMPro.TMP_Text phrasesText;
     public Animator animatorUrsula;
     public Animator animatorPNJ;
-    public Player controller;
-   // public GameObject trigger;
+    public Player controller; 
+    //public GameObject trigger;
    
     void Start()
     {
@@ -30,13 +30,13 @@ public class DialogManager : MonoBehaviour
         
         sentencesQueue = new Queue<string>();
         
-        Debug.Log(sentencesQueue.Count);
+        //Debug.Log(sentencesQueue.Count);
     }
 
     public void InitiateDialogue(Dialogs dialogs)
     {
-        Debug.Log("Starting to chat with " + dialogs.name);
-        nameText.text = dialogs.name;
+        Debug.Log("Starting to chat with " + dialogs.DialogueName);
+        nameText.text = dialogs.DialogueName;
         phrasesText.text = "...";
         
         sentencesQueue.Clear();
@@ -56,7 +56,7 @@ public class DialogManager : MonoBehaviour
 
     IEnumerator DisplayNextSentence(Dialogs dialogs)
     {
-        Debug.Log("gonna chat soon");
+        //Debug.Log("gonna chat soon");
         if (!dialogs) yield break;
         while (sentencesQueue.Count > 0)
         {
@@ -70,8 +70,8 @@ public class DialogManager : MonoBehaviour
             animatorUrsula.SetTrigger("Next");
 
             
-            Debug.Log(sentencesQueue.First());
-            Debug.Log(sentencesQueue.Count);
+            //Debug.Log(sentencesQueue.First());
+            //Debug.Log(sentencesQueue.Count);
             
             phrasesText.text = sentencesQueue.First();
             sentencesQueue.Dequeue();
@@ -91,7 +91,7 @@ public class DialogManager : MonoBehaviour
 
         animatorUrsula.SetTrigger("End");
         
-        Debug.Log("Finished chatting.");
+        //Debug.Log("Finished chatting.");
         
         StopCoroutine("DisplayNextSentence");
     }

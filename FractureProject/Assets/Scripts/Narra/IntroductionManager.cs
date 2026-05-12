@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class IntroductionManager : MonoBehaviour
@@ -6,11 +7,8 @@ public class IntroductionManager : MonoBehaviour
     [System.Serializable]
     public class Step
     {
-        [Header("Actions à l'entrée de l'étape")]
         public List<GameObject> objectsToActivate;
         public List<GameObject> objectsToDeactivate;
-        
-        [Header("Timing")]
         public float timeBeforeNextStep;
     }
     
@@ -43,8 +41,10 @@ public class IntroductionManager : MonoBehaviour
         }
     }
 
-    public void NextStep()
+    void NextStep()
     {
+        if (isIntroFinished) return;
+        
         currentStepIndex++;
         timer = 0f;
 
@@ -54,13 +54,26 @@ public class IntroductionManager : MonoBehaviour
         }
         else
         {
-            isIntroFinished = true;
-            Debug.Log("Fin de l'introduction");
-            this.gameObject.SetActive(false);
+            StartCoroutine(FinishIntroRoutine());
         }
     }
+    
+    private IEnumerator FinishIntroRoutine()
+    {
+        isIntroFinished = true;
 
-    public void ExecuteStep(Step step)
+        Animator canvasAnim = GetComponent<Animator>();
+    
+        if (canvasAnim != null)
+        {
+            canvasAnim.SetTrigger("FinalExit");
+            yield return new WaitForSeconds(5f);
+        }
+
+        this.gameObject.SetActive(false); 
+    }
+
+    void ExecuteStep(Step step)
     {
         foreach (GameObject obj in step.objectsToActivate)
         {
