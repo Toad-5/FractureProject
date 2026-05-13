@@ -51,3 +51,4 @@ MonoBehaviour:
   characterCount: 500
   moveSpeed: 3
   catchUpSpeed: 10
+  characterRotationY: -45
