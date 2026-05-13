@@ -43,6 +43,8 @@ public class RealTimeTypewriter : MonoBehaviour
     private void Write()
     {
         char character = textToDisplay[i][j];
+        
+        SoundManager.PlaySound("TypeWriter",0.2f);
 
         if (character == '¤')
         {

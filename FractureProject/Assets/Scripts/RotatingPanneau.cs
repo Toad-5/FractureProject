@@ -23,6 +23,8 @@ public class RotatingPanneau : MonoBehaviour
         anim.SetFloat("Before",origin);
         lineAnimator.SetFloat("Before",origin);
         
+        SoundManager.PlaySound("Sign Flip");
+        
         int index = angles.IndexOf(origin);
         if (index + 1 > angles.Count -1) index = 0;
         else index++;
