@@ -18,6 +18,11 @@ public class CrowdDisplayer : MonoBehaviour
     public float moveSpeed; 
     public float catchUpSpeed;
     public float characterRotationY = 0f;
+
+    [Header("Dispersion Settings")]
+    public float dispersionDelay = 3f;
+    public float dispersionDuration = 2f;
+    public float dispersionDistance = 5f;
     
     private ComputeBuffer crowdBuffer;
     private ComputeBuffer argsBuffer;
@@ -196,7 +201,7 @@ public class CrowdDisplayer : MonoBehaviour
             
             Texture tex = (characters != null && characters.Length > 0) ? characters[0].texture : null;
             
-            mgr.Initialize(cutChars.ToArray(), oldPath, oldNodes, currentWaypointCount, oldLength, refNode, characterMesh, crowdMaterialTemplate, tex, catchUpSpeed, targetCrowd);
+            mgr.Initialize(cutChars.ToArray(), oldPath, oldNodes, currentWaypointCount, oldLength, refNode, characterMesh, crowdMaterialTemplate, tex, catchUpSpeed, targetCrowd, dispersionDelay, dispersionDuration, dispersionDistance);
         }
     }
 

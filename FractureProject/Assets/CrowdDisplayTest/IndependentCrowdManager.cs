@@ -16,12 +16,20 @@ public class IndependentCrowdManager : MonoBehaviour
     
     private Mesh characterMesh;
     private Material materialTemplate;
+    private Material materialInstance;
     
     private int currentWaypointCount; 
     private int characterCount;
     private float moveSpeed;
     private float totalPathLength;
     private float localOffset = 0f;
+
+    private float dispersionDelay;
+    private float dispersionDuration;
+    private float dispersionDistance;
+    private float blockedTimer = 0f;
+    private float dispersionTimer = 0f;
+    private bool isDispersing = false;
 
     public void Initialize(
         CrowdDisplayer.CharacterData[] characters, 
@@ -34,7 +42,10 @@ public class IndependentCrowdManager : MonoBehaviour
         Material matTemplate, 
         Texture mainTex, 
         float speed,
-        Crowd parentCrowd) 
+        Crowd parentCrowd,
+        float dispDelay,
+        float dispDuration,
+        float dispDist) 
     {
         cpuData = characters;
         characterCount = characters.Length;
@@ -52,7 +63,12 @@ public class IndependentCrowdManager : MonoBehaviour
         
         characterMesh = mesh;
         materialTemplate = matTemplate;
+        materialInstance = new Material(matTemplate);
         moveSpeed = speed;
+
+        dispersionDelay = dispDelay;
+        dispersionDuration = dispDuration;
+        dispersionDistance = dispDist;
 
         propertyBlock = new MaterialPropertyBlock();
         if (mainTex != null) propertyBlock.SetTexture("_MainTex", mainTex);
@@ -67,6 +83,9 @@ public class IndependentCrowdManager : MonoBehaviour
 
         propertyBlock.SetInt("_WaypointCount", currentWaypointCount);
         propertyBlock.SetFloat("_TotalPathLength", totalPathLength);
+        
+        propertyBlock.SetFloat("_DispersionProgress", 0f);
+        propertyBlock.SetFloat("_DispersionDistance", dispersionDistance);
 
         argsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
         argsBuffer.SetData(new uint[5] { characterMesh.GetIndexCount(0), (uint)characterCount, 0, 0, 0 });
@@ -179,7 +198,7 @@ public class IndependentCrowdManager : MonoBehaviour
             IndependentCrowdManager mgr = go.AddComponent<IndependentCrowdManager>();
             
             Texture tex = propertyBlock.GetTexture("_MainTex");
-            mgr.Initialize(cutChars.ToArray(), oldPath, oldNodes, currentWaypointCount, oldLength, refNode, characterMesh, materialTemplate, tex, moveSpeed, targetCrowd);
+            mgr.Initialize(cutChars.ToArray(), oldPath, oldNodes, currentWaypointCount, oldLength, refNode, characterMesh, materialTemplate, tex, moveSpeed, targetCrowd, dispersionDelay, dispersionDuration, dispersionDistance);
         }
     }
 
@@ -201,39 +220,84 @@ public class IndependentCrowdManager : MonoBehaviour
 
     void Update()
     {
-        if (referenceNode == null || characterCount == 0) return;
+        if (characterCount == 0) return;
 
-        bool isBlocked = (referenceNode.state == CrowdState.Stagnant);
+        if (isDispersing)
+        {
+            dispersionTimer += Time.deltaTime;
+            float progress = Mathf.Clamp01(dispersionTimer / dispersionDuration);
+            propertyBlock.SetFloat("_DispersionProgress", progress);
+
+            Graphics.DrawMeshInstancedIndirect(characterMesh, 0, materialInstance, new Bounds(Vector3.zero, Vector3.one * 1000), argsBuffer, 0, propertyBlock);
+
+            if (progress >= 1f)
+            {
+                Destroy(gameObject);
+            }
+            return;
+        }
+
+        float maxCurrentPos = -float.MaxValue;
+        int activeCount = 0;
+        
+        for (int i = 0; i < characterCount; i++)
+        {
+            if (cpuData[i].uvRect.z == 0f) continue;
+            
+            activeCount++;
+            float currentPos = cpuData[i].absoluteDistance + localOffset;
+            if (currentPos > maxCurrentPos) maxCurrentPos = currentPos;
+        }
+
+        if (activeCount == 0)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        bool isBlocked = false;
+        for (int i = 0; i < currentWaypointCount; i++)
+        {
+            if (waypointPositions[i].w >= maxCurrentPos - 0.01f)
+            {
+                if (currentPathNodes[i] != null && currentPathNodes[i].state == CrowdState.Stagnant)
+                {
+                    isBlocked = true;
+                    Debug.Log("stoppeeeeee");
+                }
+                break; 
+            }
+        }
+
         bool canMove = true;
         bool bufferDirty = false;
 
         if (isBlocked)
         {
-            float maxCurrentPos = -float.MaxValue;
-            for (int i = 0; i < characterCount; i++)
-            {
-                if (cpuData[i].uvRect.z == 0f) continue;
-
-                float currentPos = cpuData[i].absoluteDistance + localOffset;
-                if (currentPos > maxCurrentPos) maxCurrentPos = currentPos;
-            }
-
             float distanceToEnd = totalPathLength - maxCurrentPos;
             float step = Time.deltaTime * moveSpeed;
 
             canMove = !(step >= distanceToEnd);
-            if (!canMove && distanceToEnd > 0)
-            {
-                localOffset += distanceToEnd;
-            }
+            Debug.Log(canMove);
         }
 
         if (canMove)
         {
             localOffset += Time.deltaTime * moveSpeed;
+            
+            blockedTimer = 0f;
+        }
+        else
+        {
+            blockedTimer += Time.deltaTime;
+            if (blockedTimer >= dispersionDelay)
+            {
+                isDispersing = true;
+                targetCrowd.RefreshCrowdStates(true);
+                return; 
+            }
         }
 
-        int activeCount = 0;
         for (int i = 0; i < characterCount; i++)
         {
             if (cpuData[i].uvRect.z != 0f) 
@@ -243,10 +307,6 @@ public class IndependentCrowdManager : MonoBehaviour
                     cpuData[i].uvRect.z = 0f; 
                     bufferDirty = true;
                 }
-                else
-                {
-                    activeCount++;
-                }
             }
         }
 
@@ -254,12 +314,7 @@ public class IndependentCrowdManager : MonoBehaviour
 
         propertyBlock.SetFloat("_GlobalOffset", localOffset);
 
-        Graphics.DrawMeshInstancedIndirect(characterMesh, 0, materialTemplate, new Bounds(Vector3.zero, Vector3.one * 1000), argsBuffer, 0, propertyBlock);
-
-        if (activeCount == 0)
-        {
-            Destroy(gameObject);
-        }
+        Graphics.DrawMeshInstancedIndirect(characterMesh, 0, materialInstance, new Bounds(Vector3.zero, Vector3.one * 1000), argsBuffer, 0, propertyBlock);
     }
 
     void OnDisable()
@@ -268,5 +323,6 @@ public class IndependentCrowdManager : MonoBehaviour
         if (crowdBuffer != null) crowdBuffer.Release();
         if (argsBuffer != null) argsBuffer.Release();
         if (waypointBuffer != null) waypointBuffer.Release();
+        if (materialInstance != null) Destroy(materialInstance);
     }
 }

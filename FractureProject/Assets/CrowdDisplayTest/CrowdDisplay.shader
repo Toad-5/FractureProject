@@ -8,12 +8,17 @@ Shader "Custom/CrowdDisplay"
         _BounceSpeed ("Bounce Speed", Float) = 5
         _BounceAmp ("Bounce Amplitude", Float) = 0.2
         _RotationY ("Rotation Y", Float) = 0.0
+        
+        _DispersionProgress ("Dispersion Progress", Range(0, 1)) = 0.0
+        _DispersionDistance ("Dispersion Distance", Float) = 5.0
     }
 
     SubShader
     {
-        Tags { "RenderType"="TransparentCutout" "Queue"="AlphaTest" "RenderPipeline" = "UniversalPipeline" }
+        Tags { "RenderType"="Transparent" "Queue"="Transparent" "RenderPipeline" = "UniversalPipeline" }
         LOD 100
+        
+        Blend SrcAlpha OneMinusSrcAlpha
         ZWrite On
 
         Pass
@@ -60,6 +65,8 @@ Shader "Custom/CrowdDisplay"
                 int _WaypointCount;
                 float _TotalPathLength;
                 float _RotationY;
+                float _DispersionProgress;
+                float _DispersionDistance;
             CBUFFER_END
 
             Varyings vert(Attributes input, uint instanceID : SV_InstanceID)
@@ -123,8 +130,13 @@ Shader "Custom/CrowdDisplay"
                 
                 if(length(sideDir) < 0.01) sideDir = float3(1, 0, 0);
 
+                float sideSign = sign(data.randomOffset.x);
+                if (sideSign == 0.0) sideSign = 1.0;
+                
+                float3 dispersionOffset = sideDir * sideSign * (_DispersionProgress * _DispersionDistance);
+
                 float3 sideOffset = sideDir * (data.randomOffset.x * _Width);
-                float3 worldPos = basePos + sideOffset;
+                float3 worldPos = basePos + sideOffset + dispersionOffset;
 
                 float bounce = abs(sin(_Time.y * _BounceSpeed + data.randomOffset.y)) * _BounceAmp;
                 worldPos.y += bounce;
@@ -154,7 +166,9 @@ Shader "Custom/CrowdDisplay"
                 UNITY_SETUP_INSTANCE_ID(input);
                 half4 col = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, input.uv);
                 
-                clip(col.a - 0.1); 
+                col.a *= (1.0 - _DispersionProgress);
+                
+                clip(col.a - 0.01); 
                 
                 return col;
             }
