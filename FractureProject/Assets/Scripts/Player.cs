@@ -275,4 +275,9 @@ public class Player : MonoBehaviour
     {
         locked = Locked;
     }
+
+    public void ChangeCrowdSpeed(float speed)
+    {
+        crowdSpeed = speed;
+    }
 }
