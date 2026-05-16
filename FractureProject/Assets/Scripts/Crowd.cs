@@ -149,7 +149,7 @@ public class Crowd : MonoBehaviour
             }
             else if (hasSource && !hasExit) 
             {
-                node.state = mustKillDeadBranch ? CrowdState.Empty : CrowdState.Stagnant;
+                node.state = CrowdState.Stagnant;
             }
             else if (!hasSource && hasExit) 
             {
@@ -159,7 +159,7 @@ public class Crowd : MonoBehaviour
             {
                 if (node.state == CrowdState.Flowing || node.state == CrowdState.Stagnant)
                 {
-                    node.state = CrowdState.Stagnant; 
+                    node.state = mustKillDeadBranch ? CrowdState.Empty : CrowdState.Stagnant;
                 }
             }
         }
