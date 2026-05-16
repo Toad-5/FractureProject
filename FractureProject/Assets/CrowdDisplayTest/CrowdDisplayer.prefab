@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 83.46934, y: -0, z: -18.08226}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.51007396, y: 0.51007396, z: 0.51007396}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -48,7 +48,10 @@ MonoBehaviour:
   atlas: {fileID: 4343727234628468602, guid: f4f69ff8cc723534ea4efe021a245da6, type: 2}
   characterMesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
   crowdMaterialTemplate: {fileID: 2100000, guid: 0e3cd8506142fde47844c23f0cf8d887, type: 2}
-  characterCount: 500
+  characterCount: 400
   moveSpeed: 3
   catchUpSpeed: 10
   characterRotationY: -45
+  dispersionDelay: 0.5
+  dispersionDuration: 1
+  dispersionDistance: 5
