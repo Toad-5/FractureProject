@@ -263,7 +263,6 @@ public class IndependentCrowdManager : MonoBehaviour
                 if (currentPathNodes[i] != null && currentPathNodes[i].state == CrowdState.Stagnant)
                 {
                     isBlocked = true;
-                    Debug.Log("stoppeeeeee");
                 }
                 break; 
             }
@@ -278,7 +277,6 @@ public class IndependentCrowdManager : MonoBehaviour
             float step = Time.deltaTime * moveSpeed;
 
             canMove = !(step >= distanceToEnd);
-            Debug.Log(canMove);
         }
 
         if (canMove)
