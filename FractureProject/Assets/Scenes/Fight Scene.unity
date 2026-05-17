@@ -507,10 +507,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 113813337955053391, guid: 4547299ed693d1444aa137e0db253e55, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 32122b0ee5c964849b1f6db75b6f098b, type: 2}
     - target: {fileID: 1789038636438685267, guid: 4547299ed693d1444aa137e0db253e55, type: 3}
       propertyPath: m_Name
       value: Walter
