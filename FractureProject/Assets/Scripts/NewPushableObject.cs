@@ -19,15 +19,14 @@ public class NewPushableObject : MonoBehaviour
     private BoxCollider boxCol;
 
     public bool isPlayerNear = false, onX, onZ, inPlayed, outPlayed;
+
+    [SerializeField] private SpriteRenderer outline;
     
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         boxCol = GetComponent<BoxCollider>();
         baseSprite = spriteRenderer.sprite;
-        if (spriteWhenPush == null)
-            spriteWhenPush = baseSprite;
-        
         rb.isKinematic = true;
         outPlayed = true;
     }
@@ -36,8 +35,8 @@ public class NewPushableObject : MonoBehaviour
     {
         if (isPlayerNear)
         {
+            outline.color = new Color(outline.color.r, outline.color.g, outline.color.b, 1);
             
-            spriteRenderer.sprite = spriteWhenPush;
             if (isMoving) return;
             if (!inPlayed)
             {

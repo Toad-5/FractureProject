@@ -24,7 +24,8 @@ public class Player : MonoBehaviour
         Ejected,
         Pushing, //Nico
         Attacking,
-        Hit
+        Hit,
+        Down
     }
     
     public States currentState = States.Idle;
@@ -184,7 +185,10 @@ public class Player : MonoBehaviour
         }
         else
         {
-            StopCoroutine(stepCoroutine);
+            if (stepCoroutine != null)
+            {
+                StopCoroutine(stepCoroutine);
+            }
         }
 
         animatorController.OnStateChanged(newState);
