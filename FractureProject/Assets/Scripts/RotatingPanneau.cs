@@ -28,7 +28,6 @@ public class RotatingPanneau : MonoBehaviour
         int index = angles.IndexOf(origin);
         if (index + 1 > angles.Count -1) index = 0;
         else index++;
-        Debug.Log(index + " " + angles.Count);
 
         target = angles [index];
         

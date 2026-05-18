@@ -302,6 +302,7 @@ public class Player : MonoBehaviour
 
     public IEnumerator FootstepsCoroutine()
     {
+        if(!footsteps) yield break;
         while (currentState == States.Walking)
         {
             float timer = stepTime;
