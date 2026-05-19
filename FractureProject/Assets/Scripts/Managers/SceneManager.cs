@@ -3,25 +3,25 @@ using UnityEngine;
 
 public class SceneManager : MonoBehaviour
 {
-    public static SceneManager Instance { get; private set; }
+    public static SceneManager instance { get; private set; }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 
     static void Init()
     {
         GameObject obj = new GameObject("SceneManager");
-        Instance = obj.AddComponent<SceneManager>();
+        instance = obj.AddComponent<SceneManager>();
         DontDestroyOnLoad(obj);
     }
     
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (instance != null && instance != this)
         {
             Destroy(gameObject);
             return;
         }
-        Instance = this;
+        instance = this;
     }
     
     public void Temp()
