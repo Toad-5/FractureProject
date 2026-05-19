@@ -33,9 +33,10 @@ public class RotatingSign : MonoBehaviour
         {
             isPlayerNear = true;
             lineSignRenderer.color = new Color(1f, 1f, 1f, 1f);
+            
             StartCoroutine(Rumble());
+            SoundManager.PlaySound("Interact In");
         }
-        
     }
     
 
@@ -44,15 +45,18 @@ public class RotatingSign : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             isPlayerNear = false;
-            lineSignRenderer.color = new Color(1f, 1f, 1f, 0f);
+            SoundManager.PlaySound("Interact Out");
 
         }
+
     }
 
     private void Update()
     {
         if (isPlayerNear)
         {
+            lineSignRenderer.color = new Color(1f, 1f, 1f, 1f);
+            
             if (Input.GetKeyDown(KeyCode.Q) || Input.GetButtonDown("Fire1"))
             {
                 if (cooldown) return;

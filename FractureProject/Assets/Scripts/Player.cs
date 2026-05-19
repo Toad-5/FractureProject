@@ -1,11 +1,16 @@
 using System;
 using UnityEngine;
+using System.Collections;
 
 public class Player : MonoBehaviour
 {
     public static Player instance { get; private set; }
     
     public AnimatorController animatorController;
+
+    public AudioSource footsteps;
+    public float stepTime= 0.5f;
+    private Coroutine stepCoroutine;
     
     //Stoian
     public SpriteRenderer spriteRenderer;
@@ -19,7 +24,8 @@ public class Player : MonoBehaviour
         Ejected,
         Pushing, //Nico
         Attacking,
-        Hit
+        Hit,
+        Down
     }
     
     public States currentState = States.Idle;
@@ -172,6 +178,19 @@ public class Player : MonoBehaviour
         }
 
         currentState = newState;
+        if (currentState == States.Pushing || currentState == States.Walking)
+        {
+            if(stepCoroutine != null) StopCoroutine(stepCoroutine);
+            stepCoroutine = StartCoroutine(FootstepsCoroutine());
+        }
+        else
+        {
+            if (stepCoroutine != null)
+            {
+                StopCoroutine(stepCoroutine);
+            }
+        }
+
         animatorController.OnStateChanged(newState);
     }
 
@@ -182,7 +201,7 @@ public class Player : MonoBehaviour
 
         rb.linearVelocity = new Vector3(skewedDirection.x * moveSpeed, rb.linearVelocity.y, skewedDirection.z * moveSpeed);
     }
-
+    
     public void FollowCrowd()
     {
         Vector3 flatTargetPos = new Vector3(targetCrowdPoint.position.x, rb.position.y, targetCrowdPoint.position.z);
@@ -274,5 +293,28 @@ public class Player : MonoBehaviour
     public void LockPlayer(bool Locked)
     {
         locked = Locked;
+    }
+
+    public void ChangeCrowdSpeed(float speed)
+    {
+        crowdSpeed = speed;
+    }
+
+    public IEnumerator FootstepsCoroutine()
+    {
+        if(!footsteps) yield break;
+        while (currentState == States.Walking)
+        {
+            float timer = stepTime;
+            while (timer > 0)
+            {
+                timer -= Time.deltaTime;
+                yield return null;
+            }
+
+            footsteps.pitch = 1 + (UnityEngine.Random.Range(-0.15f, 0.15f));
+            footsteps.Play();
+            yield return null;
+        }
     }
 }

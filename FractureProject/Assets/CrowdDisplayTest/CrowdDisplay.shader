@@ -7,12 +7,18 @@ Shader "Custom/CrowdDisplay"
         _Width ("Largeur de la foule", Float) = 2.0
         _BounceSpeed ("Bounce Speed", Float) = 5
         _BounceAmp ("Bounce Amplitude", Float) = 0.2
+        _RotationY ("Rotation Y", Float) = 0.0
+        
+        _DispersionProgress ("Dispersion Progress", Range(0, 1)) = 0.0
+        _DispersionDistance ("Dispersion Distance", Float) = 5.0
     }
 
     SubShader
     {
-        Tags { "RenderType"="TransparentCutout" "Queue"="AlphaTest" "RenderPipeline" = "UniversalPipeline" }
+        Tags { "RenderType"="Transparent" "Queue"="Transparent" "RenderPipeline" = "UniversalPipeline" }
         LOD 100
+        
+        Blend SrcAlpha OneMinusSrcAlpha
         ZWrite On
 
         Pass
@@ -58,6 +64,9 @@ Shader "Custom/CrowdDisplay"
                 float _BounceAmp;
                 int _WaypointCount;
                 float _TotalPathLength;
+                float _RotationY;
+                float _DispersionProgress;
+                float _DispersionDistance;
             CBUFFER_END
 
             Varyings vert(Attributes input, uint instanceID : SV_InstanceID)
@@ -68,8 +77,6 @@ Shader "Custom/CrowdDisplay"
 
                 CharacterData data = _CrowdBuffer[instanceID];
 
-                // --- NOUVEAU : Mécanique de Despawn ---
-                // Si le script indique une largeur de 0, on annule l'affichage de ce vertex
                 if (data.uvRect.z == 0.0) 
                 {
                     output.positionCS = float4(0, 0, 0, 0);
@@ -82,14 +89,12 @@ Shader "Custom/CrowdDisplay"
                 int segmentIndex = 0;
                 float localProgress = 0.0;
                 
-                // 1. Exception si le personnage est en négatif (file d'attente)
                 if (targetDistance <= 0.0) 
                 {
                     segmentIndex = 0;
                     float segmentLength = _WaypointBuffer[1].w - _WaypointBuffer[0].w;
                     localProgress = targetDistance / max(0.001, segmentLength);
                 }
-                // 2. Exception si le personnage dépasse le bout (avant que le C# ne le rattrape ou despawn)
                 else if (targetDistance >= _TotalPathLength)
                 {
                     segmentIndex = _WaypointCount - 2;
@@ -97,7 +102,6 @@ Shader "Custom/CrowdDisplay"
                     float distEnd = _WaypointBuffer[segmentIndex+1].w;
                     localProgress = (targetDistance - distStart) / max(0.001, distEnd - distStart);
                 }
-                // 3. Comportement normal sur le chemin
                 else 
                 {
                     for(int i = 0; i < _WaypointCount - 1; i++) 
@@ -126,13 +130,29 @@ Shader "Custom/CrowdDisplay"
                 
                 if(length(sideDir) < 0.01) sideDir = float3(1, 0, 0);
 
+                float sideSign = sign(data.randomOffset.x);
+                if (sideSign == 0.0) sideSign = 1.0;
+                
+                float3 dispersionOffset = sideDir * sideSign * (_DispersionProgress * _DispersionDistance);
+
                 float3 sideOffset = sideDir * (data.randomOffset.x * _Width);
-                float3 worldPos = basePos + sideOffset;
+                float3 worldPos = basePos + sideOffset + dispersionOffset;
 
                 float bounce = abs(sin(_Time.y * _BounceSpeed + data.randomOffset.y)) * _BounceAmp;
                 worldPos.y += bounce;
 
                 float3 scaledPositionOS = input.positionOS.xyz * _Scale.xyz;
+                
+                float radY = radians(_RotationY);
+                float cosY = cos(radY);
+                float sinY = sin(radY);
+                
+                float xRot = scaledPositionOS.x * cosY - scaledPositionOS.z * sinY;
+                float zRot = scaledPositionOS.x * sinY + scaledPositionOS.z * cosY;
+                
+                scaledPositionOS.x = xRot;
+                scaledPositionOS.z = zRot;
+                
                 float3 finalWorldPos = worldPos + scaledPositionOS; 
                 output.positionCS = TransformWorldToHClip(finalWorldPos);
 
@@ -146,7 +166,9 @@ Shader "Custom/CrowdDisplay"
                 UNITY_SETUP_INSTANCE_ID(input);
                 half4 col = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, input.uv);
                 
-                clip(col.a - 0.1); 
+                col.a *= (1.0 - _DispersionProgress);
+                
+                clip(col.a - 0.01); 
                 
                 return col;
             }

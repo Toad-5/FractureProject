@@ -41,6 +41,8 @@ public class PlayerAttack : MonoBehaviour
         playerMovement.ChangeState(Player.States.Attacking);
         nextAttackTime = Time.time + attackCooldown;
 
+        Player.instance.locked = true;
+        
         Vector3 hitCenter = transform.position + (playerMovement.lastFacingDirection * attackRange);
         hitCenter.y = transform.position.y;
 
@@ -65,6 +67,8 @@ public class PlayerAttack : MonoBehaviour
     {
         currentHealth -= damage;
         Debug.Log("Le joueur a pris " + damage + " dégâts ! Vie : " + currentHealth);
+        
+        Player.instance.locked = true;
 
         if (currentHealth <= 0)
         {
@@ -81,6 +85,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (playerMovement.currentState == Player.States.Hit)
         {
+            Player.instance.locked = false;
             playerMovement.ChangeState(Player.States.Idle);
         }
     }
@@ -88,12 +93,15 @@ public class PlayerAttack : MonoBehaviour
     private void Die()
     {
         Debug.Log("GAME OVER : Le joueur est mort !");
+        playerMovement.ChangeState(Player.States.Down);
+        Player.instance.locked = true;
     }
 
     private void EndAttack()
     {
         if (playerMovement.currentState == Player.States.Attacking)
         {
+            Player.instance.locked = false;
             playerMovement.ChangeState(Player.States.Idle);
         }
     }

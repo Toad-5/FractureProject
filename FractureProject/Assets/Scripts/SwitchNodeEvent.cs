@@ -10,7 +10,7 @@ public class SwitchNodeEvent : MonoBehaviour
     public void Bind(SwitchCrowdNode node, Crowd crowd)
     {
         this.node = node;
-        onSwitch += crowd.RefreshCrowdStates;
+        onSwitch += () => crowd.RefreshCrowdStates();
     }
 
     public void SwitchEvent(int amount)

@@ -10,7 +10,7 @@ public class StopNodeEvent : MonoBehaviour
     public void Bind(StopCrowdNode node, Crowd crowd)
     {
         this.node = node;
-        onStop += crowd.RefreshCrowdStates;
+        onStop += () => crowd.RefreshCrowdStates();
     }
     
     public void SetStop(bool stop)

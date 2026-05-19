@@ -128,6 +128,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   animatorController: {fileID: 0}
+  footsteps: {fileID: 0}
+  stepTime: 0.5
   spriteRenderer: {fileID: 429946383945169466}
   currentState: 0
   lastFacingDirection: {x: 0.70710677, y: 0, z: 0.70710677}
@@ -509,7 +511,7 @@ Animator:
   m_GameObject: {fileID: 9106801808924270028}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 6bbe496519e04d747a54c25f2767d43a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 32122b0ee5c964849b1f6db75b6f098b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

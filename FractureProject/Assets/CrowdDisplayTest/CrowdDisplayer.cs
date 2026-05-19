@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.U2D;
-using System.Collections.Generic;
 
 public class CrowdDisplayer : MonoBehaviour
 {
@@ -18,6 +17,12 @@ public class CrowdDisplayer : MonoBehaviour
     public int characterCount;
     public float moveSpeed; 
     public float catchUpSpeed;
+    public float characterRotationY = 0f;
+
+    [Header("Dispersion Settings")]
+    public float dispersionDelay = 3f;
+    public float dispersionDuration = 2f;
+    public float dispersionDistance = 5f;
     
     private ComputeBuffer crowdBuffer;
     private ComputeBuffer argsBuffer;
@@ -196,7 +201,7 @@ public class CrowdDisplayer : MonoBehaviour
             
             Texture tex = (characters != null && characters.Length > 0) ? characters[0].texture : null;
             
-            mgr.Initialize(cutChars.ToArray(), oldPath, oldNodes, currentWaypointCount, oldLength, refNode, characterMesh, crowdMaterialTemplate, tex, catchUpSpeed, targetCrowd);
+            mgr.Initialize(cutChars.ToArray(), oldPath, oldNodes, currentWaypointCount, oldLength, refNode, characterMesh, crowdMaterialTemplate, tex, catchUpSpeed, targetCrowd, dispersionDelay, dispersionDuration, dispersionDistance);
         }
     }
 
@@ -251,6 +256,8 @@ public class CrowdDisplayer : MonoBehaviour
         if (bufferDirty) NormalizeDistances();
 
         propertyBlock.SetFloat("_GlobalOffset", globalOffset);
+        propertyBlock.SetFloat("_RotationY", characterRotationY);
+        
         Graphics.DrawMeshInstancedIndirect(characterMesh, 0, crowdMaterialTemplate, new Bounds(Vector3.zero, Vector3.one * 1000), argsBuffer, 0, propertyBlock);
     }
     
