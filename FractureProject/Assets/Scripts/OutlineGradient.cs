@@ -11,7 +11,7 @@ public class OutlineGradient : MonoBehaviour
 
     private void Start()
     {
-        outline.color = new Color(outline.color.r, outline.color.g, outline.color.b, 0);
+        outline.color = new Color(1f, 1f, 1f, 0);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -31,7 +31,7 @@ public class OutlineGradient : MonoBehaviour
             player = null;
             isPlayerNear = false;
 
-            outline.color = new Color(outline.color.r, outline.color.g, outline.color.b, 0);
+            outline.color = new Color(1f, 1f, 1f, 0);
         }
     }
 
@@ -43,8 +43,6 @@ public class OutlineGradient : MonoBehaviour
         float clampedDistance = 1f - Mathf.Clamp01(distance / maxDistance);
 
         float opacity = clampedDistance * (153f / 255f);
-        outline.color = new Color(outline.color.r, outline.color.g, outline.color.b, opacity);
-
-        Debug.Log(opacity);
+        outline.color = new Color(1f, 1f, 1f, opacity);
     }
 }
