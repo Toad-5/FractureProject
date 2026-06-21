@@ -10,9 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 340c55947df29be47bfebc56c0e5f9f5, type: 3}
-  m_Name: PreEndADialog
+  m_Name: GetInTheCar!!!
   m_EditorClassIdentifier: Assembly-CSharp::DialogData
   <dialog>k__BackingField:
-  - text: I have to move on.
+  - text: ...
     isPlayer: 1
-    actorName: Ursula
+  - text: "Oh I messed up\u2026 I really messed up."
+    isPlayer: 1
+  - text: No no no no no... Goddamn it!
+    isPlayer: 1
+  - text: ...
+    isPlayer: 1
+  - text: I gotta go now. See you soon, mom.
+    isPlayer: 1
